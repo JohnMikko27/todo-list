@@ -1,0 +1,17 @@
+html,
+body {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+#top {
+  display: flex;
+  justify-content: center;
+}
+
+#content {
+  display: grid;
+  grid-template-columns: .33fr 1fr;
+  height: 90vh;
+}
