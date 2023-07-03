@@ -2,16 +2,8 @@
 
 const todo = () => {
     let todos = [];
-
-    let title;
-    let description;
-    let dueDate;
-    let priority;
-
-    const getTitle = () => title;
-    const getDescription = () => description;
-    const getDueDate = () => dueDate;
-    const getPriority = () => priority;
+    
+    const getTodos = () => todos;
 
     const createTodo = (title, description, dueDate, priority) => {
         const todoItem = {
@@ -24,10 +16,18 @@ const todo = () => {
         // return todoItem ??? is this necessary???
     }
 
+    const deleteTodo = (todoItem) => {
+        for (let i = 0; i < todos.length; i++) {
+            if (todos[i] == todoItem)  {
+                todos.splice(i, 1);
+            }
+        }
+    }
 
 
 
 
-    return { createTodo, getTitle, getDescription, getDueDate, getPriority};
+
+    return { getTodos, createTodo, deleteTodo};
 };
 
