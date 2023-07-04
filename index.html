@@ -10,14 +10,35 @@
   <body>
     <div id="top">Todo List</div>
     <div id="content">
-      <div id="left-side">
-        <div id="all-tasks">All Tasks</div>
-        <div id="today">Today</div>
-        <div id="next-seven-days">Next 7 Days</div>
-        <div id="projects">Projects</div>
-        <!-- have an important section maybe -->
+      <div id="left-side">  
+        <div id="home">
+          Home
+          <div id="all-tasks">All Tasks</div>
+          <div id="today">Today</div>
+          <div id="thisWeek">Next 7 Days</div>
+          <div id="important">Important</div>
+        </div>
+        <div id="project">Projects
+          <div id="projects"></div>
+        </div>
+        <button id="add-task">Add Task</button>
       </div>
       <div id="right-side">Tasks</div>
     </div>
+    <form action="./main.js" method="post">
+      <div>
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title">
+      </div>
+      <div>
+        <label for="description">Description</label>
+        <input type="text" id="description" name="description">
+      </div>
+      <div>
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date">
+      </div>
+      <button type="submit" id="submit">Submit</button>
+    </form>
   </body>
 </html>
