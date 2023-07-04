@@ -1,1 +1,2 @@
-console.log('it is again');
+import { eventHandlers } from "./modules/controller";
+eventHandlers();

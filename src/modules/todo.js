@@ -1,6 +1,6 @@
 // can create to do item, delete, edit, etc. 
 
-const todo = () => {
+export const todo = () => {
     let todos = [];
     
     const getTodos = () => todos;
@@ -12,6 +12,7 @@ const todo = () => {
             dueDate, 
             priority
         };
+        
         todos.push(todoItem);
         // return todoItem ??? is this necessary???
     }
@@ -24,8 +25,10 @@ const todo = () => {
         }
     }
 
+    /*const editTodo = (todoItem) => { not sure how to implement this
+    }*/
 
-
+    
 
 
     return { getTodos, createTodo, deleteTodo};
