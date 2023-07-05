@@ -1,16 +1,15 @@
 // can create to do item, delete, edit, etc. 
 
-export const todo = () => {
+export const todo = (() => {
     let todos = [];
     
     const getTodos = () => todos;
 
-    const createTodo = (title, description, dueDate, priority) => {
+    const createTodo = (title, description, dueDate) => {
         const todoItem = {
             title, 
             description, 
             dueDate, 
-            priority
         };
         
         todos.push(todoItem);
@@ -32,5 +31,5 @@ export const todo = () => {
 
 
     return { getTodos, createTodo, deleteTodo};
-};
+})();
 

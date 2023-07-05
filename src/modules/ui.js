@@ -10,10 +10,11 @@ export const getFormValues = () => {
         const title = document.querySelector('#title');
         const description = document.querySelector('#description');
         const date = document.querySelector('#date');
-        console.log(title, description, date)
-        return { title, description, date };
+        console.log(title.value, description.value, date.value);
+        todo.createTodo(title.value, description.value, date.value);
+        console.log(todo.getTodos());
     })
-}
+}   
 
 export const displayTodos = () => {
     
