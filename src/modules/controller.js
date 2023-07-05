@@ -3,15 +3,17 @@
 import { makeTodo } from "./ui";
 import { todo } from "./todo";
 
-const addTask = document.querySelector('#add-task');
+
 
 export const eventHandlers = () => {
-    
+    const addTask = document.querySelector('#add-task');
+    const form = document.querySelector('form');
     //show the form that will take title, description, and due date
     //then once it is submitted, take those values, 
     //and use it to create a new todo item from todo.js
     //then display that todo item using a display function from ui.js
     makeTodo();
-
+    
+    addTask.addEventListener('click', () => form.classList.toggle('hidden'))
 
 };

@@ -15,16 +15,58 @@ body {
 
 #content {
   display: grid;
-  grid-template-columns: .33fr 1fr;
+  grid-template-columns: .25fr 1fr;
   height: 90vh;
 }
+
+/* 
+* ------------------- left side -------------------
+*/
 
 #left-side {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
 }
 
+#home>div:first-child {
+  justify-self: start;
+  font-size: 2rem;
+}
+
 #home {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
+  justify-items: center;
+  align-items: center;
+}
+
+#project-container {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+#project-container>div:first-child {
+  justify-self: start;
+  font-size: 2rem;
+}
+
+
+#all-tasks:hover,
+#today:hover,
+#this-week:hover,
+#important:hover {
+  cursor: pointer;
+  background-color: red;
+}
+
+/*
+* ------------------- right side -------------------
+*/
+
+/*
+* ------------------- form -------------------
+*/
+
+.hidden {
+  display: none;
 }

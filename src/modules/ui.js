@@ -15,14 +15,19 @@ export const makeTodo = () => {
         todo.createTodo(title.value, description.value, dueDate.value);
         //console.log(todo.getTodos());
         displayTodos();
+
+        form.reset();
+        form.classList.toggle('hidden');
     })
 }   
 
 export const displayTodos = () => {
-    const body = document.querySelector('body');
-    //for each todo item in todos array
-    //create a container that stores its title, description, and due date, 
-    //no need to style it yet, just add those things
+    const tasks = document.querySelector('#tasks');
+
+    //deletes all the currently displayed tasks
+    //then displays them to avoid duplication of tasks being displayed
+    tasks.textContent = ' ';
+    
     for (let i = 0; i < todo.getTodos().length; i++) {
         let taskContainer = document.createElement('div');
         let title = document.createElement('div');
@@ -39,7 +44,7 @@ export const displayTodos = () => {
         taskContainer.appendChild(description);
         taskContainer.appendChild(dueDate)
 
-        body.appendChild(taskContainer);
+        tasks.appendChild(taskContainer);
     }
 }
 
