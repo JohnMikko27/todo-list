@@ -1,10 +1,10 @@
 //change the dom
-import { todo } from "./todo";
+import { todo, project } from "./todo";
 
 //able to get the form's values when it submits now
 export const makeTodo = () => {
-    const form = document.querySelector('form');
-    form.addEventListener('submit', (e) => {
+    const taskForm = document.querySelector('#task-form');
+    taskForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const title = document.querySelector('#title');
@@ -16,10 +16,31 @@ export const makeTodo = () => {
         //console.log(todo.getTodos());
         displayTodos();
 
-        form.reset();
-        form.classList.toggle('hidden');
+        taskForm.reset();
+        taskForm.classList.toggle('hidden');
     })
 }   
+
+export const makeProject = () => {
+// on the click of the add project button
+// show a modal that asks for the project name with  'add' and 'cancel' buttons
+// if 'add' is clicked create a new project from todo.js and push it into 'projects' array
+    const projectForm = document.querySelector('#project-form');
+    projectForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const projectName = document.querySelector('#project-name');
+
+        project.createProject(projectName.value);
+        displayProjects();
+
+        projectForm.reset();
+        projectForm.classList.add('hidden');
+        
+    })
+// and then create a function to display all projects
+
+}
 
 export const displayTodos = () => {
     const tasks = document.querySelector('#tasks');
@@ -45,6 +66,16 @@ export const displayTodos = () => {
         taskContainer.appendChild(dueDate)
 
         tasks.appendChild(taskContainer);
+    }
+}
+
+export const displayProjects = () => {
+    const projects = document.querySelector('#projects');
+    projects.textContent = ' ';
+    for (let i = 0; i < project.getProjects().length; i++) {
+        const div = document.createElement('div');
+        div.textContent = project.getProjects()[i].projectName;
+        projects.appendChild(div);
     }
 }
 

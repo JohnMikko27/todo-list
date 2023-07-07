@@ -33,3 +33,17 @@ export const todo = (() => {
     return { getTodos, createTodo, deleteTodo};
 })();
 
+export const project = (() => {
+    let projects = []
+    const getProjects = () => projects;
+
+    const createProject = (projectName) => {
+        const projectItem = {
+            projectName
+        }
+        projects.push(projectItem);
+    }
+
+    return { createProject, getProjects }
+})()
+
