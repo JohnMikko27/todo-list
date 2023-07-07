@@ -50,6 +50,10 @@ body {
   font-size: 2rem;
 }
 
+.project:hover {
+  cursor: pointer;
+  background-color: red;
+}
 
 #all-tasks:hover,
 #today:hover,
