@@ -14,17 +14,14 @@ export const eventHandlers = () => {
     const submitProjectButton = document.querySelector('#submit-project-button')
 
     makeTodo();
+    //maybe add these eventListeneres in ui.js
+    //put them in a function
     addTask.addEventListener('click', () => taskForm.classList.toggle('hidden'));
 
-    // on the click of the add project button !
-    // show a modal that asks for the project name with  'add' and 'cancel' buttons !
-    // if 'cancel' clicked, hide the modal again and reset it
-    // if 'add' is clicked create a new project from todo.js and push it into 'projects' array
-    // and then create a function to display all projects
+    makeProject();
     addProject.addEventListener('click', () => {
         //console.log('hi')
-        projectForm.classList.remove('hidden');
-        makeProject();
+        projectForm.classList.toggle('hidden');
     });
 
 };

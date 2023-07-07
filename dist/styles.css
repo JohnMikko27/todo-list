@@ -40,12 +40,12 @@ body {
   align-items: center;
 }
 
-#project-container {
+#projects {
   display: grid;
   grid-template-columns: 1fr;
 }
 
-#project-container>div:first-child {
+#projects>div:first-child {
   justify-self: start;
   font-size: 2rem;
 }

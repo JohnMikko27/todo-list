@@ -35,8 +35,7 @@ export const makeProject = () => {
         displayProjects();
 
         projectForm.reset();
-        projectForm.classList.add('hidden');
-        
+        projectForm.classList.toggle('hidden');
     })
 // and then create a function to display all projects
 
@@ -70,12 +69,12 @@ export const displayTodos = () => {
 }
 
 export const displayProjects = () => {
-    const projects = document.querySelector('#projects');
-    projects.textContent = ' ';
+    const projectContainer = document.querySelector('#project-container');
+    projectContainer.textContent = ' ';
     for (let i = 0; i < project.getProjects().length; i++) {
         const div = document.createElement('div');
         div.textContent = project.getProjects()[i].projectName;
-        projects.appendChild(div);
+        projectContainer.appendChild(div);
     }
 }
 
