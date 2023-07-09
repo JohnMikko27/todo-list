@@ -34,7 +34,6 @@ export const todo = (() => {
 
 export const project = (() => {
     let projects = []
-    //need to set a default one to not create bugs      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     let currentProject;
 
     const getProjects = () => projects;
@@ -56,14 +55,10 @@ export const project = (() => {
             }
         }
     }
-   /*
-    * create a default project function that creates a default project
-    * it then pushes that project to the projects array
-    * then we call that and then display projects from ui.js to controller.js
-    */
 
     const createDefaultProject = () => {
-        createProject('default');
+        createProject('Default');
+        setCurrentProject('Default')
     }
     return { createProject, getProjects, getCurrentProject, setCurrentProject, createDefaultProject }
 })()
