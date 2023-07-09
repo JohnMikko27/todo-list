@@ -13,7 +13,7 @@ export const todo = (() => {
         };
         
         todos.push(todoItem);
-       // console.log(project.getCurrentProject().projectName)
+      //  if(project.getCurrentProject()===undefined) return;
         project.getCurrentProject().taskArr.push(todoItem);
         // return todoItem ??? is this necessary???
     }
@@ -34,7 +34,7 @@ export const todo = (() => {
 
 export const project = (() => {
     let projects = []
-    //need to set a default one to not create bugs
+    //need to set a default one to not create bugs      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     let currentProject;
 
     const getProjects = () => projects;
@@ -56,8 +56,16 @@ export const project = (() => {
             }
         }
     }
+   /*
+    * create a default project function that creates a default project
+    * it then pushes that project to the projects array
+    * then we call that and then display projects from ui.js to controller.js
+    */
 
-    return { createProject, getProjects, getCurrentProject, setCurrentProject }
+    const createDefaultProject = () => {
+        createProject('default');
+    }
+    return { createProject, getProjects, getCurrentProject, setCurrentProject, createDefaultProject }
 })()
 
 //get the tasks that are in that project and display them

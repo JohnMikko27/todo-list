@@ -1,7 +1,5 @@
-//change the dom
 import { todo, project } from "./todo";
 
-//able to get the form's values when it submits now
 export const makeTodo = () => {
     const taskForm = document.querySelector('#task-form');
     taskForm.addEventListener('submit', (e) => {
@@ -11,9 +9,9 @@ export const makeTodo = () => {
         const description = document.querySelector('#description');
         const dueDate = document.querySelector('#date');
 
-        //console.log(title.value, description.value, date.value);
+      
         todo.createTodo(title.value, description.value, dueDate.value);
-        //console.log(todo.getTodos());
+       
       //  displayTodos();
         displayTasksInProject();
         taskForm.reset();
@@ -22,9 +20,6 @@ export const makeTodo = () => {
 }   
 
 export const makeProject = () => {
-// on the click of the add project button
-// show a modal that asks for the project name with  'add' and 'cancel' buttons
-// if 'add' is clicked create a new project from todo.js and push it into 'projects' array
     const projectForm = document.querySelector('#project-form');
     projectForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -37,17 +32,15 @@ export const makeProject = () => {
         projectForm.reset();
         projectForm.classList.toggle('hidden');
     })
-// and then create a function to display all projects
-
 }
 
+//make this the display 'ALL TODOS' function when 'ALL TASKS' is clicked
 export const displayTodos = () => {
     const tasks = document.querySelector('#tasks');
 
     //deletes all the currently displayed tasks
-    //then displays them to avoid duplication of tasks being displayed
     tasks.textContent = ' ';
-    
+    //then displays them to avoid duplication of tasks being displayed
     for (let i = 0; i < todo.getTodos().length; i++) {
         let taskContainer = document.createElement('div');
         let title = document.createElement('div');
@@ -87,33 +80,17 @@ export const showTasksInProject = () => {
     const projects = document.querySelectorAll('.project');
     
     projects.forEach(item => item.addEventListener('click', (e) => {
-        //make the right side content's tasks-container blank, but leave the 'add-task' button
-        console.log('hi magandang ppl')
+        console.log('project clicked')
         clearTaskContainer();
-        
-        //get the tasks that are in that project and display them
-    //to do this ^^^ maybe have an array in each project item that contains all the tasks in that project
-    //and also have a function called get current project/directory to set the current project everytime a project is clicked
-    //so that when we display the project, we can get the correct tasks
         project.setCurrentProject(e.target.textContent);
         displayTasksInProject();
-
-
-
-    //big question for this, how are we going to track every task in a project or how are we going to know which
-    // is the current project so that we can display the correct tasks
-
-    //another idea: have an array in each projectItem object and a function that adds tasks to that project 
-    //(which is why current project function is needed)
-
-        
     }))
 }
 
 const displayTasksInProject = () => {
     const taskContainer = document.querySelector('#tasks');
     taskContainer.textContent = ' ';
-    let current = project.getProjects();
+    
     for (let i = 0; i < project.getCurrentProject().taskArr.length; i++) {
         let taskContainer = document.createElement('div');
         let title = document.createElement('div');
@@ -139,3 +116,7 @@ export const clearTaskContainer = () => {
     taskContainer.textContent = ' ';
 }
 
+export const displayDefaultProject = () => {
+    project.createDefaultProject();
+    displayProjects();
+}
