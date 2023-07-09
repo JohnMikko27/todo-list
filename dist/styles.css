@@ -1,21 +1,30 @@
+:root {
+  --bgColor1: #3f8fdf;
+  --bgColor2: rgba(225, 223, 223, 0.478);
+}
+
 html,
 body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
 #top {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 17vh;
-  font-size: 4rem;
+  height: 10vh;
+  font-size: 3rem;
+  background-color: var(--bgColor1);
+  color: white;
 }
 
 #content {
   display: grid;
-  grid-template-columns: .25fr 1fr;
+  grid-template-columns: 0.2fr 1fr;
   height: 90vh;
 }
 
@@ -24,12 +33,13 @@ body {
 */
 
 #left-side {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  background-color: var(--bgColor2);
+  padding: 1rem;
 }
 
-#home>div:first-child {
+#left-side > div:first-child {
   justify-self: start;
+  align-self: start;
   font-size: 2rem;
 }
 
@@ -38,6 +48,7 @@ body {
   grid-template-columns: repeat(1, 1fr);
   justify-items: center;
   align-items: center;
+  gap: 1rem;
 }
 
 #projects {
@@ -45,7 +56,7 @@ body {
   grid-template-columns: 1fr;
 }
 
-#projects>div:first-child {
+#projects > div:first-child {
   justify-self: start;
   font-size: 2rem;
 }
@@ -53,6 +64,13 @@ body {
 .project:hover {
   cursor: pointer;
   background-color: red;
+}
+
+#project-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  justify-items: center;
 }
 
 #all-tasks:hover,
@@ -66,7 +84,10 @@ body {
 /*
 * ------------------- right side -------------------
 */
-
+img {
+  width: 2rem;
+  height: auto;
+}
 /*
 * ------------------- form -------------------
 */

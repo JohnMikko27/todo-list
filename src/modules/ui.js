@@ -1,4 +1,6 @@
 import { todo, project } from "./todo";
+import star from '../icons/star-outline.svg'
+import optionButton from '../icons/more-vertical-alt.svg'
 
 export const makeTodo = () => {
     const taskForm = document.querySelector('#task-form');
@@ -61,6 +63,7 @@ export const displayTodos = () => {
     }
 }
 
+
 export const displayProjects = () => {
     const projectContainer = document.querySelector('#project-container');
     projectContainer.textContent = ' ';
@@ -96,16 +99,22 @@ const displayTasksInProject = () => {
         let title = document.createElement('div');
         let description = document.createElement('div');
         let dueDate = document.createElement('div');
+        let important = document.createElement('img');
+        let options = document.createElement('img');
 
         title.textContent = project.getCurrentProject().taskArr[i].title;
         description.textContent = project.getCurrentProject().taskArr[i].description;
         dueDate.textContent = project.getCurrentProject().taskArr[i].dueDate;
+        important.src = star;
+        options.src = optionButton;
 
         taskContainer.setAttribute('id', 'task-container');
 
         taskContainer.appendChild(title);
         taskContainer.appendChild(description);
-        taskContainer.appendChild(dueDate)
+        taskContainer.appendChild(dueDate);
+        taskContainer.appendChild(important);
+        taskContainer.appendChild(options);
 
         tasks.appendChild(taskContainer);
     }

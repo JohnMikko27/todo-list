@@ -25,7 +25,6 @@ export const todo = (() => {
             }
         }
     }
-
     /*const editTodo = (todoItem) => { not sure how to implement this
     }*/
 
@@ -63,13 +62,23 @@ export const project = (() => {
     return { createProject, getProjects, getCurrentProject, setCurrentProject, createDefaultProject }
 })()
 
-//get the tasks that are in that project and display them
-    //to do this ^^^ maybe have an array in each project item that contains all the tasks in that project
-    //and also have a function called get current project/directory to set the current project everytime a project is clicked
-    //so that when we display the project, we can get the correct tasks
+/*
+ * Task1: create a delete function that deletes a project and/or tasks
+First I need to add the 3 dots as an option to each task and project
+When delete is clicked
+Delete that project/task from its corresponding array and then call displayProjects/displayTasksInProject again
 
-    //big question for this, how are we going to track every task in a project or how are we going to know which
-    // is the current project so that we can display the correct tasks
 
-    //another idea: have an array in each projectItem object and a function that adds tasks to that project 
-    //(which is why current project function is needed)
+
+ * Task2: create an edit function where you can edit project's name and/or a task
+When the edit button is clicked, 
+show a container/div/form that contains that task's current name, description and date
+will have to add the current name, description and date to that form 
+and then when form is submitted
+display tasks or project again so that it seems it was edited
+
+
+
+ * Task3: create a function that changes the color of the current project so that we know which project the tasks are going into
+This will be easy; just use the getCurrentProject and change the color of that
+ */
