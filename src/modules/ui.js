@@ -14,8 +14,8 @@ export const makeTodo = () => {
         //console.log(title.value, description.value, date.value);
         todo.createTodo(title.value, description.value, dueDate.value);
         //console.log(todo.getTodos());
-        displayTodos();
-
+      //  displayTodos();
+        displayTasksInProject();
         taskForm.reset();
         taskForm.classList.toggle('hidden');
     })
@@ -113,7 +113,7 @@ export const showTasksInProject = () => {
 const displayTasksInProject = () => {
     const taskContainer = document.querySelector('#tasks');
     taskContainer.textContent = ' ';
-    
+    let current = project.getProjects();
     for (let i = 0; i < project.getCurrentProject().taskArr.length; i++) {
         let taskContainer = document.createElement('div');
         let title = document.createElement('div');
@@ -121,8 +121,8 @@ const displayTasksInProject = () => {
         let dueDate = document.createElement('div');
 
         title.textContent = project.getCurrentProject().taskArr[i].title;
-        description.textContent = project.getCurrentProject().taskArr[i].title;
-        dueDate.textContent = project.getCurrentProject().taskArr[i].title;
+        description.textContent = project.getCurrentProject().taskArr[i].description;
+        dueDate.textContent = project.getCurrentProject().taskArr[i].dueDate;
 
         taskContainer.setAttribute('id', 'task-container');
 

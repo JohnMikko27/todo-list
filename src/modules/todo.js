@@ -14,7 +14,7 @@ export const todo = (() => {
         
         todos.push(todoItem);
        // console.log(project.getCurrentProject().projectName)
-       // project.getCurrentProject().getTaskArr().push(todoItem);
+        project.getCurrentProject().taskArr.push(todoItem);
         // return todoItem ??? is this necessary???
     }
 
@@ -34,6 +34,7 @@ export const todo = (() => {
 
 export const project = (() => {
     let projects = []
+    //need to set a default one to not create bugs
     let currentProject;
 
     const getProjects = () => projects;
@@ -42,7 +43,6 @@ export const project = (() => {
         const projectItem = {
             projectName, 
             taskArr: [],
-            getTaskArr: () => taskArr
         }
         projects.push(projectItem);
     }
