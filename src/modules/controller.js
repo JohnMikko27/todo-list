@@ -23,5 +23,4 @@ export const eventHandlers = () => {
         //console.log('hi')
         projectForm.classList.toggle('hidden');
     });
-    showTasksInProject();
 };

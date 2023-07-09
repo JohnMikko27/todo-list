@@ -13,6 +13,8 @@ export const todo = (() => {
         };
         
         todos.push(todoItem);
+       // console.log(project.getCurrentProject().projectName)
+       // project.getCurrentProject().getTaskArr().push(todoItem);
         // return todoItem ??? is this necessary???
     }
 
@@ -27,23 +29,44 @@ export const todo = (() => {
     /*const editTodo = (todoItem) => { not sure how to implement this
     }*/
 
-    
-
-
     return { getTodos, createTodo, deleteTodo};
 })();
 
 export const project = (() => {
     let projects = []
+    let currentProject;
+
     const getProjects = () => projects;
 
     const createProject = (projectName) => {
         const projectItem = {
-            projectName
+            projectName, 
+            taskArr: [],
+            getTaskArr: () => taskArr
         }
         projects.push(projectItem);
     }
 
-    return { createProject, getProjects }
+    const getCurrentProject = () => currentProject;
+
+    const setCurrentProject = (name) => {
+        for (let i = 0; i < projects.length; i++) {
+            if (projects[i].projectName == name) {
+                currentProject = projects[i];
+            }
+        }
+    }
+
+    return { createProject, getProjects, getCurrentProject, setCurrentProject }
 })()
 
+//get the tasks that are in that project and display them
+    //to do this ^^^ maybe have an array in each project item that contains all the tasks in that project
+    //and also have a function called get current project/directory to set the current project everytime a project is clicked
+    //so that when we display the project, we can get the correct tasks
+
+    //big question for this, how are we going to track every task in a project or how are we going to know which
+    // is the current project so that we can display the correct tasks
+
+    //another idea: have an array in each projectItem object and a function that adds tasks to that project 
+    //(which is why current project function is needed)
