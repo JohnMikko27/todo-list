@@ -59,7 +59,17 @@ export const project = (() => {
         createProject('Default');
         setCurrentProject('Default')
     }
-    return { createProject, getProjects, getCurrentProject, setCurrentProject, createDefaultProject }
+
+    const deleteProject = (name) => {
+        for (let i = 0; i < projects.length; i++) {
+            if (projects[i].projectName == name) {
+                projects.splice(i, 1);
+            }
+        }
+    }
+
+
+    return { createProject, getProjects, getCurrentProject, setCurrentProject, createDefaultProject, deleteProject }
 })()
 
 /*
@@ -67,10 +77,13 @@ export const project = (() => {
 First I need to add the 3 dots as an option to each task and project
 When delete is clicked
 Delete that project/task from its corresponding array and then call displayProjects/displayTasksInProject again
+*/
 
 
 
- * Task2: create an edit function where you can edit project's name and/or a task
+
+
+ /* Task2: create an edit function where you can edit project's name and/or a task
 When the edit button is clicked, 
 show a container/div/form that contains that task's current name, description and date
 will have to add the current name, description and date to that form 
