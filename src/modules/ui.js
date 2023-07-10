@@ -155,3 +155,15 @@ export const deleteProject = () => {
         displayProjects();
     }))
 }
+
+export const addTask = () => {
+    const addTask = document.querySelector('#add-task');
+    const taskForm = document.querySelector('#task-form');
+    addTask.addEventListener('click', () => taskForm.classList.toggle('hidden'));
+}
+
+export const addProject = () => {
+    const addProject = document.querySelector('#add-project-button');
+    const projectForm = document.querySelector('#project-form');
+    addProject.addEventListener('click', () => projectForm.classList.toggle('hidden'));
+}
