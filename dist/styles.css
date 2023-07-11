@@ -61,26 +61,16 @@ body {
   font-size: 2rem;
 }
 
+.project {
+  display: grid;
+  grid-template-columns: 1fr .1fr;
+  align-items: center;
+}
+
 .project:hover {
   cursor: pointer;
   background-color: red;
 }
-
-#project-container {
-  display: grid;
-  
-}
-
-.options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-items: center;
-  align-items: center;
-  background-color: rgb(125, 125, 245);
-
-}
-
-
 
 #all-tasks:hover,
 #today:hover,
@@ -94,13 +84,18 @@ body {
 * ------------------- right side -------------------
 */
 img {
-  width: 2rem;
+  width: 1.1rem;
   height: auto;
 }
 
 img:hover {
   cursor: pointer;
   background-color: rgb(203, 203, 203);
+}
+
+.task-container {
+  display: grid;
+  grid-template-columns: .8fr .5fr .3fr .1fr;
 }
 /*
 * ------------------- form -------------------

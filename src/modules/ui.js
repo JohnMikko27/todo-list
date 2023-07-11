@@ -15,7 +15,6 @@ export const makeTodo = () => {
 
         todo.createTodo(title.value, description.value, dueDate.value);
        
-      //  displayTodos();
         displayTasksInProject();
 
         taskForm.reset();
@@ -66,36 +65,36 @@ export const displayTodos = () => {
     }
 }
 
-
-//should change it so that the image and the textContent both go in a single container instead of being in different ones
-//change this first !!!!!!!!! ^^^^^^^^^^ both the text and options img should go in the div.project as children
 export const displayProjects = () => {
     const projectContainer = document.querySelector('#project-container');
     projectContainer.textContent = ' ';
 
     for (let i = 0; i < project.getProjects().length; i++) {
-        let container = document.createElement('div');
+       
         let div = document.createElement('div');
         let options = document.createElement('img');
 
         div.textContent = project.getProjects()[i].projectName;
         options.src = close;
-        container.classList.add('project');
+        div.classList.add('project');
         options.classList.add('project-options');
-        
-        container.appendChild(div);
-        container.appendChild(options);
-        projectContainer.appendChild(container);
+        //options.classList.add('hidden');
+
+        div.appendChild(options);
+        projectContainer.appendChild(div);
     }
     deleteProject();
     showTasksInProject();
+    
 }
 //rename this function later
 //when any of the projects are clicked
 export const showTasksInProject = () => {
     const projects = document.querySelectorAll('.project');
-    
+    const projectNameHeader = document.querySelector('#project-name-header')
+
     projects.forEach(item => item.addEventListener('click', (e) => {
+        projectNameHeader.textContent = `${e.target.textContent}`
         console.log('project clicked')
         clearTaskContainer();
         project.setCurrentProject(e.target.textContent);
@@ -113,6 +112,7 @@ const displayTasksInProject = () => {
         let title = document.createElement('div');
         let description = document.createElement('div');
         let dueDate = document.createElement('div');
+        let btnCont = document.createElement('div')
         let important = document.createElement('img');
         let options = document.createElement('img');
 
@@ -122,16 +122,17 @@ const displayTasksInProject = () => {
         important.src = star;
         options.src = option;
 
-        taskContainer.setAttribute('id', 'task-container');
+        taskContainer.classList.add('task-container')
         important.classList.add('important');
         options.classList.add('task-options');
 
+        btnCont.appendChild(important);
+        btnCont.appendChild(options)
         taskContainer.appendChild(title);
         taskContainer.appendChild(description);
         taskContainer.appendChild(dueDate);
-        taskContainer.appendChild(important);
-        taskContainer.appendChild(options);
-
+        taskContainer.appendChild(btnCont);
+    
         tasks.appendChild(taskContainer);
     }
 }
@@ -146,19 +147,13 @@ export const displayDefaultProject = () => {
     displayProjects();
 }
 
-
-
 //when you delete a project, it still shows the current tasks in that project (if you clicked it before deleting)
 export const deleteProject = () => {
     const projectOptions = document.querySelectorAll('.project-options');
 
-    projectOptions.forEach(element => element.addEventListener('click', function event(e) {
-        console.log('option clicked');
-        console.log(e.target.previousSibling.textContent);
-
+    projectOptions.forEach(element => element.addEventListener('click', (e) => {
         project.deleteProject(e.target.previousSibling.textContent);
         displayProjects();
-        
     }))
 }
 
@@ -177,3 +172,14 @@ export const addProject = () => {
     addProject.addEventListener('click', () => projectForm.classList.toggle('hidden'));
     makeProject();
 }
+
+//show close button when hover over project later
+/*
+const showCloseButton = () => {
+    const projects = document.querySelectorAll('.project');
+
+    projects.forEach(project => project.addEventListener('mouseover', (e) => {
+        console.log(e.target)
+        e.target.lastChild.classList.toggle('hidden');
+    }))
+}*/
