@@ -68,8 +68,16 @@ body {
 
 #project-container {
   display: grid;
-  grid-template-columns: 1fr .1fr;
+  
+}
+
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
   align-items: center;
+  background-color: rgb(125, 125, 245);
+
 }
 
 

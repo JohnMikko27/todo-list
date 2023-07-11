@@ -1,6 +1,7 @@
 import { todo, project } from "./todo";
 import star from '../icons/star-outline.svg'
-import optionButton from '../icons/more-vertical-alt.svg'
+import close from '../icons/close.png'
+import option from '../icons/more-vertical-alt.svg'
 
 //attaches eventListener for when taskForm is submitted
 export const makeTodo = () => {
@@ -67,26 +68,29 @@ export const displayTodos = () => {
 
 
 //should change it so that the image and the textContent both go in a single container instead of being in different ones
+//change this first !!!!!!!!! ^^^^^^^^^^ both the text and options img should go in the div.project as children
 export const displayProjects = () => {
     const projectContainer = document.querySelector('#project-container');
     projectContainer.textContent = ' ';
 
     for (let i = 0; i < project.getProjects().length; i++) {
-        const div = document.createElement('div');
+        let container = document.createElement('div');
+        let div = document.createElement('div');
         let options = document.createElement('img');
 
         div.textContent = project.getProjects()[i].projectName;
-        options.src = optionButton;
-        div.classList.add('project');
+        options.src = close;
+        container.classList.add('project');
         options.classList.add('project-options');
         
-        projectContainer.appendChild(div);
-        projectContainer.appendChild(options);
+        container.appendChild(div);
+        container.appendChild(options);
+        projectContainer.appendChild(container);
     }
     deleteProject();
     showTasksInProject();
 }
-
+//rename this function later
 //when any of the projects are clicked
 export const showTasksInProject = () => {
     const projects = document.querySelectorAll('.project');
@@ -116,7 +120,7 @@ const displayTasksInProject = () => {
         description.textContent = project.getCurrentProject().taskArr[i].description;
         dueDate.textContent = project.getCurrentProject().taskArr[i].dueDate;
         important.src = star;
-        options.src = optionButton;
+        options.src = option;
 
         taskContainer.setAttribute('id', 'task-container');
         important.classList.add('important');
@@ -142,13 +146,7 @@ export const displayDefaultProject = () => {
     displayProjects();
 }
 
-/*
- * Task1: create a delete function that deletes a project and/or tasks
-First I need to add the 3 dots as an option to each task and project
-When the 3 dots is clicked, show an element that says rename/delete
-When delete is clicked
-Delete that project/task from its corresponding array and then call displayProjects/displayTasksInProject again
-*/
+
 
 //when you delete a project, it still shows the current tasks in that project (if you clicked it before deleting)
 export const deleteProject = () => {
@@ -156,15 +154,8 @@ export const deleteProject = () => {
 
     projectOptions.forEach(element => element.addEventListener('click', function event(e) {
         console.log('option clicked');
-        //if default is the only project, and you try to delete it, there will be an error      !!!!!!!! FIx this!!!!!
         console.log(e.target.previousSibling.textContent);
 
-        /*
-         * When projectOptions is clicked, create a pop up element that gives an option of deleting or editing
-         */
-
-
-       
         project.deleteProject(e.target.previousSibling.textContent);
         displayProjects();
         
