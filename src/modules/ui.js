@@ -2,6 +2,7 @@ import { todo, project } from "./todo";
 import star from '../icons/star-outline.svg'
 import optionButton from '../icons/more-vertical-alt.svg'
 
+//attaches eventListener for when taskForm is submitted
 export const makeTodo = () => {
     const taskForm = document.querySelector('#task-form');
     taskForm.addEventListener('submit', (e) => {
@@ -21,6 +22,7 @@ export const makeTodo = () => {
     })
 }   
 
+//attaches eventListener for when projectForm is submitted
 export const makeProject = () => {
     const projectForm = document.querySelector('#project-form');
     projectForm.addEventListener('submit', (e) => {
@@ -81,9 +83,6 @@ export const displayProjects = () => {
         projectContainer.appendChild(div);
         projectContainer.appendChild(options);
     }
-    //if i implement this conditional statement, the eventListeners will be gone, I can't delete projects
-    let length = project.getCurrentProject().length;
-    //if (project.getCurrentProject().length===undefined) return;
     deleteProject();
     showTasksInProject();
 }
@@ -177,6 +176,7 @@ export const addTask = () => {
     const addTask = document.querySelector('#add-task');
     const taskForm = document.querySelector('#task-form');
     addTask.addEventListener('click', () => taskForm.classList.toggle('hidden'));
+    makeTodo();
 }
 
 //shows hidden project form
@@ -184,4 +184,5 @@ export const addProject = () => {
     const addProject = document.querySelector('#add-project-button');
     const projectForm = document.querySelector('#project-form');
     addProject.addEventListener('click', () => projectForm.classList.toggle('hidden'));
+    makeProject();
 }

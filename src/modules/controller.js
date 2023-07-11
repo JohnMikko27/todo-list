@@ -8,8 +8,6 @@ import { todo } from "./todo";
 export const eventHandlers = () => {
     
     displayDefaultProject();
-    makeTodo();
-    makeProject();
     addTask();
     addProject();
    
