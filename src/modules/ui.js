@@ -64,6 +64,7 @@ export const displayTodos = () => {
 }
 
 
+//should change it so that the image and the textContent both go in a single container instead of being in different ones
 export const displayProjects = () => {
     const projectContainer = document.querySelector('#project-container');
     projectContainer.textContent = ' ';
@@ -80,6 +81,9 @@ export const displayProjects = () => {
         projectContainer.appendChild(div);
         projectContainer.appendChild(options);
     }
+    //if i implement this conditional statement, the eventListeners will be gone, I can't delete projects
+    let length = project.getCurrentProject().length;
+    //if (project.getCurrentProject().length===undefined) return;
     deleteProject();
     showTasksInProject();
 }
@@ -95,7 +99,8 @@ export const showTasksInProject = () => {
         displayTasksInProject();
     }))
 }
-
+//have to add a delete tasks function that deletes the tasks on the page if the current project is the one that got deleted
+//because it still shows the previous tasks even if that project got deleted
 const displayTasksInProject = () => {
     const taskContainer = document.querySelector('#tasks');
     taskContainer.textContent = ' ';
@@ -141,27 +146,40 @@ export const displayDefaultProject = () => {
 /*
  * Task1: create a delete function that deletes a project and/or tasks
 First I need to add the 3 dots as an option to each task and project
+When the 3 dots is clicked, show an element that says rename/delete
 When delete is clicked
 Delete that project/task from its corresponding array and then call displayProjects/displayTasksInProject again
 */
 
+//when you delete a project, it still shows the current tasks in that project (if you clicked it before deleting)
 export const deleteProject = () => {
     const projectOptions = document.querySelectorAll('.project-options');
 
-    projectOptions.forEach(element => element.addEventListener('click', (e) => {
+    projectOptions.forEach(element => element.addEventListener('click', function event(e) {
         console.log('option clicked');
+        //if default is the only project, and you try to delete it, there will be an error      !!!!!!!! FIx this!!!!!
         console.log(e.target.previousSibling.textContent);
+
+        /*
+         * When projectOptions is clicked, create a pop up element that gives an option of deleting or editing
+         */
+
+
+       
         project.deleteProject(e.target.previousSibling.textContent);
         displayProjects();
+        
     }))
 }
 
+//shows hidden task form
 export const addTask = () => {
     const addTask = document.querySelector('#add-task');
     const taskForm = document.querySelector('#task-form');
     addTask.addEventListener('click', () => taskForm.classList.toggle('hidden'));
 }
 
+//shows hidden project form
 export const addProject = () => {
     const addProject = document.querySelector('#add-project-button');
     const projectForm = document.querySelector('#project-form');

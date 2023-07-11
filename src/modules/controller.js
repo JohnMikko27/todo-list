@@ -7,16 +7,12 @@ import { todo } from "./todo";
 
 export const eventHandlers = () => {
     
-
- 
-    const cancelProjectButton = document.querySelector('#cancel-project-button');
-    const submitProjectButton = document.querySelector('#submit-project-button')
-
     displayDefaultProject();
     makeTodo();
+    makeProject();
     addTask();
     addProject();
-    makeProject();
+   
     
-    deleteProject()
+    
 };
