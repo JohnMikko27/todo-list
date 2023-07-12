@@ -148,7 +148,7 @@ const displayTasksInProject = () => {
         tasks.appendChild(taskContainer);
     }
     taskOptionClicked();
-    deleteTaskInProject();
+    //deleteTaskInProject();
 }
 
 export const clearTaskContainer = () => {
@@ -206,7 +206,8 @@ export const taskOptionClicked = () => {
     taskOptions.forEach(element => element.addEventListener('click', (e) => {
 
         e.target.parentNode.parentNode.lastChild.classList.toggle('hidden');
-
+        deleteTaskInProject();
+        editTaskInProject();
         /* 
          * 
          * if clicked outside of the element, then make it hidden/or delete it
@@ -220,12 +221,105 @@ export const taskOptionClicked = () => {
 /*
  * When each task-options is clicked, show an edit/delete button which allows you to either edit the task or delete the task
  * Edit: 
- * 
- * 
- * Delete: 
- *  - when the delete button is clicked, delete that task from that corresponding project
- *  - and then displayTasks again so that it will show the current tasks
+ * When edit button is clicked, 
+ * show a pop up form with the inputs (title, description, dueDate) being the value of that current task
+ * make this into a form that shows over everything else
+ * when the form is submitted, change that task's title, description, dueDate, etc. 
+ * Do this ^^^ by going through the currentProject's taskArr and then change the corresponding task's title, description, dueDate
+ * then displayTasksInProject again
  */
+
+const editTaskInProject = () => {
+
+    //for each editTask button clcicked, show the form with its current values then attach form eventListener
+    const editTaskForm = document.querySelector('#edit-task-form')
+    const editButtons = document.querySelectorAll('.task-edit-button');
+    editButtons.forEach(btn => btn.addEventListener('click', (e) => {
+        
+        // e.target.parentNode.parentNode.appendChild(form);
+        editTaskForm.classList.toggle('hidden');    
+
+        document.querySelector('#edit-title').value = e.target.parentNode.parentNode.firstChild.textContent;
+        document.querySelector('#edit-description').value = e.target.parentNode.parentNode.children.item(1).textContent;
+        document.querySelector('#edit-date').value = e.target.parentNode.parentNode.children.item(2).textContent;
+
+        const title = document.querySelector('#edit-title');
+        const description = document.querySelector('#edit-description');
+        const dueDate = document.querySelector('#edit-date');
+        console.log(title)
+        console.log(e.target.parentNode.parentNode.children.item(1))
+        console.log(e.target.parentNode.parentNode.children.item(2))
+
+        title.textContent = e.target.parentNode.parentNode.firstChild.textContent;
+        description.textContent = e.target.parentNode.parentNode.children.item(1).textContent;
+        dueDate.textContent = e.target.parentNode.parentNode.children.item(2).textContent;
+
+        editTaskForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const title = document.querySelector('#edit-title').value;
+            const description = document.querySelector('#edit-description').value;
+            const dueDate = document.querySelector('#edit-dueDate').value;
+
+            for (let i = 0; i < project.getCurrentProject().taskArr.length; i++) {
+                if (project.getCurrentProject().taskArr[i].title == title) {
+                    project.getCurrentProject().taskArr[i].title = title;
+                    project.getCurrentProject().taskArr[i].description = description;
+                    project.getCurrentProject().taskArr[i].dueDate = dueDate;
+                }
+            }
+        
+            editTaskForm.reset();
+            editTaskForm.classList.toggle('hidden');
+            
+            displayTasksInProject();
+            
+           })
+    }))
+
+}
+/*
+const createEditTaskForm = () => {
+    const form = document.createElement('form');
+    const titleLabel = document.createElement('label');
+    const titleInput = document.createElement('input');
+    const descriptionLabel = document.createElement('label');
+    const descriptionInput = document.createElement('input');
+    const dueDateLabel = document.createElement('label');
+    const dueDateInput = document.createElement('input');
+    const button = document.createElement('button');
+    const div1 = document.createElement('div');
+    const div2 = document.createElement('div');
+    const div3 = document.createElement('div');
+
+    titleLabel.textContent = 'Title';
+    descriptionLabel.textContent = 'Description';
+    dueDateLabel.textContent = 'Due Date';
+    button.textContent = 'Submit';
+
+    form.setAttribute('id', 'edit-task-form');
+    titleLabel.setAttribute('for', 'edit-title');
+    titleInput.setAttribute('id', 'edit-title');
+    descriptionLabel.setAttribute('for', 'edit-description');
+    descriptionInput.setAttribute('id', 'edit-description')
+    dueDateInput.setAttribute('type', 'date');
+    dueDateInput.setAttribute('id', 'edit-dueDate');
+    button.setAttribute('type', 'submit');
+    button.setAttribute('id', 'edit-task-button');
+
+    div1.appendChild(titleLabel);
+    div1.appendChild(titleInput);
+    div2.appendChild(descriptionLabel);
+    div2.appendChild(descriptionInput);
+    div3.appendChild(dueDateLabel);
+    div3.appendChild(dueDateInput);
+    form.appendChild(div1);
+    form.appendChild(div2);
+    form.appendChild(div3);
+    form.appendChild(button);
+
+    return form;
+}*/
 
 const deleteTaskInProject = () => {
     const deleteButton = document.querySelectorAll('.task-delete-button');
