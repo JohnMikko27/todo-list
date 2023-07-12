@@ -115,6 +115,9 @@ const displayTasksInProject = () => {
         let btnCont = document.createElement('div')
         let important = document.createElement('img');
         let options = document.createElement('img');
+        const container = document.createElement('div');
+        const editButton = document.createElement('div');
+        const deleteButton = document.createElement('div');
 
         title.textContent = project.getCurrentProject().taskArr[i].title;
         description.textContent = project.getCurrentProject().taskArr[i].description;
@@ -122,21 +125,18 @@ const displayTasksInProject = () => {
         important.src = star;
         options.src = option;
 
-        const container = document.createElement('div');
-        const editButton = document.createElement('div');
-        const deleteButton = document.createElement('div');
-
         editButton.textContent = 'Edit';
         deleteButton.textContent = 'Delete';
         container.classList.add('optional-buttons')
         container.classList.add('hidden');
-        container.appendChild(editButton);
-        container.appendChild(deleteButton);
-
         taskContainer.classList.add('task-container')
         important.classList.add('important');
         options.classList.add('task-options');
+        editButton.classList.add('task-edit-button');
+        deleteButton.classList.add('task-delete-button');
 
+        container.appendChild(editButton);
+        container.appendChild(deleteButton);
         btnCont.appendChild(important);
         btnCont.appendChild(options)
         taskContainer.appendChild(title);
@@ -148,6 +148,7 @@ const displayTasksInProject = () => {
         tasks.appendChild(taskContainer);
     }
     taskOptionClicked();
+    deleteTaskInProject();
 }
 
 export const clearTaskContainer = () => {
@@ -203,22 +204,7 @@ export const taskOptionClicked = () => {
     const taskOptions = document.querySelectorAll('.task-options')
 
     taskOptions.forEach(element => element.addEventListener('click', (e) => {
-       
-        //shows edit/delete buttons
-        //then calls the corresponding functions
-        //edit.eventListner function
-        //delete.eventListener function , etc, etc
-       /* const container = document.createElement('div');
-        const editButton = document.createElement('div');
-        const deleteButton = document.createElement('div');
 
-        editButton.textContent = 'Edit';
-        deleteButton.textContent = 'Delete';
-        container.classList.add('optional-buttons')
-        container.appendChild(editButton);
-        container.appendChild(deleteButton);*/
-
-        console.log(e.target.parentNode.parentNode.lastChild)
         e.target.parentNode.parentNode.lastChild.classList.toggle('hidden');
 
         /* 
@@ -240,3 +226,15 @@ export const taskOptionClicked = () => {
  *  - when the delete button is clicked, delete that task from that corresponding project
  *  - and then displayTasks again so that it will show the current tasks
  */
+
+const deleteTaskInProject = () => {
+    const deleteButton = document.querySelectorAll('.task-delete-button');
+
+    deleteButton.forEach(btn => btn.addEventListener('click', (e) => {
+        console.log('task deleted')
+        console.log(e.target.parentNode.parentNode.firstChild.textContent);
+        console.log(project.getCurrentProject())
+        todo.deleteTodo(e.target.parentNode.parentNode.firstChild.textContent);
+        displayTasksInProject();
+    }))
+}

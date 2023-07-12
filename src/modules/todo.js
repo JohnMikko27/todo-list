@@ -19,9 +19,9 @@ export const todo = (() => {
     }
 
     const deleteTodo = (todoItem) => {
-        for (let i = 0; i < todos.length; i++) {
-            if (todos[i] == todoItem)  {
-                todos.splice(i, 1);
+        for (let i = 0; i < project.getCurrentProject().taskArr.length; i++) {
+            if (project.getCurrentProject().taskArr[i].title == todoItem)  {
+                project.getCurrentProject().taskArr.splice(i, 1);
             }
         }
     }
