@@ -96,7 +96,7 @@ export const showTasksInProject = () => {
     projects.forEach(item => item.addEventListener('click', (e) => {
         projectNameHeader.textContent = `${e.target.textContent}`
         console.log('project clicked')
-        clearTaskContainer();
+       // clearTaskContainer();
         project.setCurrentProject(e.target.textContent);
         displayTasksInProject();
     }))
@@ -104,9 +104,8 @@ export const showTasksInProject = () => {
 //have to add a delete tasks function that deletes the tasks on the page if the current project is the one that got deleted
 //because it still shows the previous tasks even if that project got deleted
 const displayTasksInProject = () => {
-    const taskContainer = document.querySelector('#tasks');
-    taskContainer.textContent = ' ';
-    
+    clearTaskContainer();
+    let tasks = document.querySelector('#tasks')
     for (let i = 0; i < project.getCurrentProject().taskArr.length; i++) {
         let taskContainer = document.createElement('div');
         let title = document.createElement('div');
@@ -115,9 +114,9 @@ const displayTasksInProject = () => {
         let btnCont = document.createElement('div')
         let important = document.createElement('img');
         let options = document.createElement('img');
-        const container = document.createElement('div');
-        const editButton = document.createElement('div');
-        const deleteButton = document.createElement('div');
+        let container = document.createElement('div');
+        let editButton = document.createElement('div');
+        let deleteButton = document.createElement('div');
 
         title.textContent = project.getCurrentProject().taskArr[i].title;
         description.textContent = project.getCurrentProject().taskArr[i].description;
@@ -138,7 +137,7 @@ const displayTasksInProject = () => {
         container.appendChild(editButton);
         container.appendChild(deleteButton);
         btnCont.appendChild(important);
-        btnCont.appendChild(options)
+        btnCont.appendChild(options);
         taskContainer.appendChild(title);
         taskContainer.appendChild(description);
         taskContainer.appendChild(dueDate);
@@ -148,6 +147,7 @@ const displayTasksInProject = () => {
         tasks.appendChild(taskContainer);
     }
     taskOptionClicked();
+   // editTaskInProject();
     //deleteTaskInProject();
 }
 
@@ -200,7 +200,6 @@ const showCloseButton = () => {
 
 
 export const taskOptionClicked = () => {
-    
     const taskOptions = document.querySelectorAll('.task-options')
 
     taskOptions.forEach(element => element.addEventListener('click', (e) => {
@@ -230,51 +229,52 @@ export const taskOptionClicked = () => {
  */
 
 const editTaskInProject = () => {
-
     //for each editTask button clcicked, show the form with its current values then attach form eventListener
     const editTaskForm = document.querySelector('#edit-task-form')
     const editButtons = document.querySelectorAll('.task-edit-button');
     editButtons.forEach(btn => btn.addEventListener('click', (e) => {
-        
-        // e.target.parentNode.parentNode.appendChild(form);
-        editTaskForm.classList.toggle('hidden');    
-
-        document.querySelector('#edit-title').value = e.target.parentNode.parentNode.firstChild.textContent;
-        document.querySelector('#edit-description').value = e.target.parentNode.parentNode.children.item(1).textContent;
-        document.querySelector('#edit-date').value = e.target.parentNode.parentNode.children.item(2).textContent;
+      
+        editTaskForm.classList.toggle('hidden');
+        /*
+        what i could instead do is instead of getting each input, i should loop through the
+         project.getCurrentProject.taskArr until i find the 
+        project with the same title (that project's title will be equal to 
+        document.querySelector('#edit-title').value = e.target.parentNode.parentNode.firstChild.textContent;)
+        and then just change the form accordingly
+        */
+        //document.querySelector('#edit-title').value = e.target.parentNode.parentNode.firstChild.textContent;
+        //document.querySelector('#edit-description').value = e.target.parentNode.parentNode.children.item(1).textContent;
+       // document.querySelector('#edit-date').value = e.target.parentNode.parentNode.children.item(2).textContent;
 
         const title = document.querySelector('#edit-title');
         const description = document.querySelector('#edit-description');
         const dueDate = document.querySelector('#edit-date');
-        console.log(title)
-        console.log(e.target.parentNode.parentNode.children.item(1))
-        console.log(e.target.parentNode.parentNode.children.item(2))
 
-        title.textContent = e.target.parentNode.parentNode.firstChild.textContent;
-        description.textContent = e.target.parentNode.parentNode.children.item(1).textContent;
-        dueDate.textContent = e.target.parentNode.parentNode.children.item(2).textContent;
+        title.value = e.target.parentNode.parentNode.children.item(0).textContent;
+        let p = e.target.parentNode.parentNode.children.item(0).textContent;
+        description.value = e.target.parentNode.parentNode.children.item(1).textContent;
+        dueDate.value = e.target.parentNode.parentNode.children.item(2).textContent;
 
         editTaskForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const title = document.querySelector('#edit-title').value;
-            const description = document.querySelector('#edit-description').value;
-            const dueDate = document.querySelector('#edit-dueDate').value;
+            const title2 = document.querySelector('#edit-title').value;
+            const description2 = document.querySelector('#edit-description').value;
+            const dueDate2 = document.querySelector('#edit-date').value;
 
             for (let i = 0; i < project.getCurrentProject().taskArr.length; i++) {
-                if (project.getCurrentProject().taskArr[i].title == title) {
-                    project.getCurrentProject().taskArr[i].title = title;
-                    project.getCurrentProject().taskArr[i].description = description;
-                    project.getCurrentProject().taskArr[i].dueDate = dueDate;
+                if (project.getCurrentProject().taskArr[i].title == p) {
+                    project.getCurrentProject().taskArr[i].title = title2;
+                    project.getCurrentProject().taskArr[i].description = description2;
+                    project.getCurrentProject().taskArr[i].dueDate = dueDate2;
                 }
             }
-        
+
+            displayTasksInProject();
+
             editTaskForm.reset();
             editTaskForm.classList.toggle('hidden');
-            
-            displayTasksInProject();
-            
-           })
+        })
     }))
 
 }

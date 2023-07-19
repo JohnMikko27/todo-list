@@ -10,7 +10,4 @@ export const eventHandlers = () => {
     displayDefaultProject();
     addTask();
     addProject();
-   
-    
-    
 };

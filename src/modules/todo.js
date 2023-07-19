@@ -13,9 +13,8 @@ export const todo = (() => {
         };
         
         todos.push(todoItem);
-      //  if(project.getCurrentProject()===undefined) return;
         project.getCurrentProject().taskArr.push(todoItem);
-        // return todoItem ??? is this necessary???
+       
     }
 
     const deleteTodo = (todoItem) => {
@@ -25,10 +24,20 @@ export const todo = (() => {
             }
         }
     }
-    /*const editTodo = (todoItem) => { not sure how to implement this
-    }*/
+    
+    const editTodo = (oldTitle, newTitle, newDescription, newDueDate) => {
+        for (let i = 0; i < project.getCurrentProject().taskArr.length; i++) {
+            if (project.getCurrentProject().taskArr[i].title == oldTitle) {
+                project.getCurrentProject().taskArr[i].title = newTitle;
+                project.getCurrentProject().taskArr[i].description = newDescription;
+                project.getCurrentProject().taskArr[i].dueDate = newDueDate;
+            }
+        }
+    }
 
-    return { getTodos, createTodo, deleteTodo};
+    
+
+    return { getTodos, createTodo, deleteTodo, editTodo};
 })();
 
 export const project = (() => {
