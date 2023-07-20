@@ -1,9 +1,9 @@
 // can create to do item, delete, edit, etc. 
 
 export const todo = (() => {
-    let todos = [];
+    let allTodos = [];
     
-    const getTodos = () => todos;
+    const getAllTodos = () => allTodos;
 
     const createTodo = (title, description, dueDate) => {
         const todoItem = {
@@ -12,7 +12,7 @@ export const todo = (() => {
             dueDate, 
         };
         
-        todos.push(todoItem);
+        allTodos.push(todoItem);
         project.getCurrentProject().taskArr.push(todoItem);
        
     }
@@ -21,6 +21,14 @@ export const todo = (() => {
         for (let i = 0; i < project.getCurrentProject().taskArr.length; i++) {
             if (project.getCurrentProject().taskArr[i].title == todoItem)  {
                 project.getCurrentProject().taskArr.splice(i, 1);
+            }
+        }
+    }
+
+    const deleteTodoInAllTodosArray = (todoItem) => {
+        for (let i = 0; i < getAllTodos().length; i++) {
+            if (getAllTodos()[i].title == todoItem) {
+                getAllTodos().splice(i,1);
             }
         }
     }
@@ -35,7 +43,7 @@ export const todo = (() => {
         }
     }
 
-    return { getTodos, createTodo, deleteTodo, editTodo};
+    return { getAllTodos, createTodo, deleteTodo, editTodo, deleteTodoInAllTodosArray };
 })();
 
 export const project = (() => {

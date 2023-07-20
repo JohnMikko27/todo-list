@@ -39,21 +39,18 @@ export const makeProject = () => {
 }
 
 //make this the display 'ALL TODOS' function when 'ALL TASKS' is clicked
-export const displayTodos = () => {
-    const tasks = document.querySelector('#tasks');
-
-    //deletes all the currently displayed tasks
-    tasks.textContent = ' ';
-    //then displays them to avoid duplication of tasks being displayed
-    for (let i = 0; i < todo.getTodos().length; i++) {
+export const displayAllTodos = () => {
+    clearTaskContainer();
+    const tasks = document.querySelector('#tasks')
+    for (let i = 0; i < todo.getAllTodos().length; i++) {
         let taskContainer = document.createElement('div');
         let title = document.createElement('div');
         let description = document.createElement('div');
         let dueDate = document.createElement('div');
 
-        title.textContent = todo.getTodos()[i].title;
-        description.textContent = todo.getTodos()[i].description;
-        dueDate.textContent = todo.getTodos()[i].dueDate;
+        title.textContent = todo.getAllTodos()[i].title;
+        description.textContent = todo.getAllTodos()[i].description;
+        dueDate.textContent = todo.getAllTodos()[i].dueDate;
 
         taskContainer.classList.add('task-container');
 
@@ -63,6 +60,17 @@ export const displayTodos = () => {
 
         tasks.appendChild(taskContainer);
     }
+}
+
+/*
+if all tasks button is clicked, display all of the tasks
+
+task button is clicked, make the tasks container blank then display all the tasks
+*/
+export const allTasksClicked = () => {
+    const allTasksButton = document.querySelector('#all-tasks');
+
+    allTasksButton.addEventListener('click', (e) => displayAllTodos());
 }
 
 export const displayProjects = () => {
@@ -151,8 +159,8 @@ const displayTasksInProject = () => {
 }
 
 export const clearTaskContainer = () => {
-    const taskContainer = document.querySelector('#tasks');
-    taskContainer.textContent = ' ';
+    const tasks = document.querySelector('#tasks');
+    tasks.textContent = ' ';
 }
 
 export const displayDefaultProject = () => {
@@ -277,6 +285,7 @@ const deleteTaskInProject = () => {
         console.log(e.target.parentNode.parentNode.firstChild.textContent);
         console.log(project.getCurrentProject())
         todo.deleteTodo(e.target.parentNode.parentNode.firstChild.textContent);
+        todo.deleteTodoInAllTodosArray(e.target.parentNode.parentNode.firstChild.textContent);
         displayTasksInProject();
     }))
 }
