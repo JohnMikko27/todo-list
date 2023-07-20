@@ -35,8 +35,6 @@ export const todo = (() => {
         }
     }
 
-    
-
     return { getTodos, createTodo, deleteTodo, editTodo};
 })();
 

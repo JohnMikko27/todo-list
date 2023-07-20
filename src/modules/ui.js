@@ -143,7 +143,6 @@ const displayTasksInProject = () => {
         taskContainer.appendChild(dueDate);
         taskContainer.appendChild(btnCont);
         taskContainer.appendChild(container);
-    
         tasks.appendChild(taskContainer);
     }
     taskOptionClicked();
@@ -206,7 +205,7 @@ export const taskOptionClicked = () => {
 
         e.target.parentNode.parentNode.lastChild.classList.toggle('hidden');
         deleteTaskInProject();
-        editTaskInProject();
+      //  editTaskInProject();
         /* 
          * 
          * if clicked outside of the element, then make it hidden/or delete it
@@ -228,98 +227,47 @@ export const taskOptionClicked = () => {
  * then displayTasksInProject again
  */
 
+
+//editing a task only works once, after u edit a task once, it breaks
+/*
 const editTaskInProject = () => {
     //for each editTask button clcicked, show the form with its current values then attach form eventListener
-    const editTaskForm = document.querySelector('#edit-task-form')
+    
     const editButtons = document.querySelectorAll('.task-edit-button');
     editButtons.forEach(btn => btn.addEventListener('click', (e) => {
-      
+        console.log('hi')
         editTaskForm.classList.toggle('hidden');
-        /*
-        what i could instead do is instead of getting each input, i should loop through the
-         project.getCurrentProject.taskArr until i find the 
-        project with the same title (that project's title will be equal to 
-        document.querySelector('#edit-title').value = e.target.parentNode.parentNode.firstChild.textContent;)
-        and then just change the form accordingly
-        */
-        //document.querySelector('#edit-title').value = e.target.parentNode.parentNode.firstChild.textContent;
-        //document.querySelector('#edit-description').value = e.target.parentNode.parentNode.children.item(1).textContent;
-       // document.querySelector('#edit-date').value = e.target.parentNode.parentNode.children.item(2).textContent;
-
-        const title = document.querySelector('#edit-title');
-        const description = document.querySelector('#edit-description');
-        const dueDate = document.querySelector('#edit-date');
+        const editTaskForm = document.querySelector('#edit-task-form')
+        let title = document.querySelector('#edit-title');
+        let description = document.querySelector('#edit-description');
+        let dueDate = document.querySelector('#edit-date');
 
         title.value = e.target.parentNode.parentNode.children.item(0).textContent;
-        let p = e.target.parentNode.parentNode.children.item(0).textContent;
         description.value = e.target.parentNode.parentNode.children.item(1).textContent;
         dueDate.value = e.target.parentNode.parentNode.children.item(2).textContent;
 
+        let oldTitle = e.target.parentNode.parentNode.children.item(0).textContent;
+
         editTaskForm.addEventListener('submit', (e) => {
+            console.log('submitted')
             e.preventDefault();
 
-            const title2 = document.querySelector('#edit-title').value;
-            const description2 = document.querySelector('#edit-description').value;
-            const dueDate2 = document.querySelector('#edit-date').value;
+            let newTitle = document.querySelector('#edit-title').value;
+            let newDescription = document.querySelector('#edit-description').value;
+            let newDueDate = document.querySelector('#edit-date').value;
 
-            for (let i = 0; i < project.getCurrentProject().taskArr.length; i++) {
-                if (project.getCurrentProject().taskArr[i].title == p) {
-                    project.getCurrentProject().taskArr[i].title = title2;
-                    project.getCurrentProject().taskArr[i].description = description2;
-                    project.getCurrentProject().taskArr[i].dueDate = dueDate2;
-                }
-            }
+            todo.editTodo(oldTitle, newTitle, newDescription, newDueDate);
 
-            displayTasksInProject();
+            
 
             editTaskForm.reset();
             editTaskForm.classList.toggle('hidden');
+            displayTasksInProject();
         })
     }))
 
 }
-/*
-const createEditTaskForm = () => {
-    const form = document.createElement('form');
-    const titleLabel = document.createElement('label');
-    const titleInput = document.createElement('input');
-    const descriptionLabel = document.createElement('label');
-    const descriptionInput = document.createElement('input');
-    const dueDateLabel = document.createElement('label');
-    const dueDateInput = document.createElement('input');
-    const button = document.createElement('button');
-    const div1 = document.createElement('div');
-    const div2 = document.createElement('div');
-    const div3 = document.createElement('div');
-
-    titleLabel.textContent = 'Title';
-    descriptionLabel.textContent = 'Description';
-    dueDateLabel.textContent = 'Due Date';
-    button.textContent = 'Submit';
-
-    form.setAttribute('id', 'edit-task-form');
-    titleLabel.setAttribute('for', 'edit-title');
-    titleInput.setAttribute('id', 'edit-title');
-    descriptionLabel.setAttribute('for', 'edit-description');
-    descriptionInput.setAttribute('id', 'edit-description')
-    dueDateInput.setAttribute('type', 'date');
-    dueDateInput.setAttribute('id', 'edit-dueDate');
-    button.setAttribute('type', 'submit');
-    button.setAttribute('id', 'edit-task-button');
-
-    div1.appendChild(titleLabel);
-    div1.appendChild(titleInput);
-    div2.appendChild(descriptionLabel);
-    div2.appendChild(descriptionInput);
-    div3.appendChild(dueDateLabel);
-    div3.appendChild(dueDateInput);
-    form.appendChild(div1);
-    form.appendChild(div2);
-    form.appendChild(div3);
-    form.appendChild(button);
-
-    return form;
-}*/
+*/
 
 const deleteTaskInProject = () => {
     const deleteButton = document.querySelectorAll('.task-delete-button');
@@ -332,3 +280,14 @@ const deleteTaskInProject = () => {
         displayTasksInProject();
     }))
 }
+
+
+/*
+editing a task once works, but after correctly editing, when i try to edit a second time 
+- even if the task is in a different project-it breaks 
+
+It's because the eventListener for submitting the form run twice on the second time i try to submit a form (second time editing)
+so it makes the task blank because it runs twice
+
+Maybe learn about bubbling and propagation to hopefully fix this
+*/
