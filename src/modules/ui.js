@@ -69,8 +69,11 @@ task button is clicked, make the tasks container blank then display all the task
 */
 export const allTasksClicked = () => {
     const allTasksButton = document.querySelector('#all-tasks');
-
-    allTasksButton.addEventListener('click', (e) => displayAllTodos());
+    const projectNameHeader = document.querySelector('#project-name-header')
+    allTasksButton.addEventListener('click', (e) => {
+        displayAllTodos()
+        projectNameHeader.textContent = 'All Tasks';
+    });
 }
 
 export const displayProjects = () => {

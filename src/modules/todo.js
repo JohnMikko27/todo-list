@@ -71,8 +71,8 @@ export const project = (() => {
     }
 
     const createDefaultProject = () => {
-        createProject('Default');
-        setCurrentProject('Default')
+        createProject('Home');
+        setCurrentProject('Home');
     }
 
     const deleteProject = (name) => {
