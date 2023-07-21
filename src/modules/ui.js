@@ -62,6 +62,40 @@ export const displayAllTodos = () => {
     }
 }
 
+export const displayTodayTodos = () => {
+    clearTaskContainer();
+    const tasks = document.querySelector('#tasks')
+
+    for (let i = 0; i < todo.getTodayTodos().length; i++) {
+        let taskContainer = document.createElement('div');
+        let title = document.createElement('div');
+        let description = document.createElement('div');
+        let dueDate = document.createElement('div');
+
+        title.textContent = todo.getTodayTodos()[i].title;
+        description.textContent = todo.getTodayTodos()[i].description;
+        dueDate.textContent = todo.getTodayTodos()[i].dueDate;
+
+        taskContainer.classList.add('task-container');
+
+        taskContainer.appendChild(title);
+        taskContainer.appendChild(description);
+        taskContainer.appendChild(dueDate)
+
+        tasks.appendChild(taskContainer);
+    }
+}
+
+export const todayTasksClicked = () => {
+    const today = document.querySelector('#today');
+    const projectNameHeader = document.querySelector('#project-name-header');
+
+    today.addEventListener('click', (e) => {
+        displayTodayTodos();
+        projectNameHeader.textContent = "Today's Tasks";
+    })
+}
+
 /*
 if all tasks button is clicked, display all of the tasks
 
@@ -171,7 +205,11 @@ export const displayDefaultProject = () => {
     displayProjects();
 }
 
-//when you delete a project, it still shows the current tasks in that project (if you clicked it before deleting)
+//1. when you delete a project, it still shows the current tasks in that project (if you clicked it before deleting)
+//2. other functionality: when you hover over project that's when the option to delete it should show
+//   do this by adding a mouseover eventListener and when you hover over the project, it should show the 'X' to delete it, and then run a 
+//   function that attaches an eventListener to that 'X' when you hover over it
+
 export const deleteProject = () => {
     const projectOptions = document.querySelectorAll('.project-options');
 

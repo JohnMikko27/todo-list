@@ -2,8 +2,11 @@
 
 export const todo = (() => {
     let allTodos = [];
+    let todayTodos = [];
+    let nextWeekTodos = [];
     
     const getAllTodos = () => allTodos;
+    const getTodayTodos = () => todayTodos;
 
     const createTodo = (title, description, dueDate) => {
         const todoItem = {
@@ -11,10 +14,10 @@ export const todo = (() => {
             description, 
             dueDate, 
         };
-        
+
+        checkTodoItemDate(todoItem)
         allTodos.push(todoItem);
         project.getCurrentProject().taskArr.push(todoItem);
-       
     }
 
     const deleteTodo = (todoItem) => {
@@ -43,7 +46,21 @@ export const todo = (() => {
         }
     }
 
-    return { getAllTodos, createTodo, deleteTodo, editTodo, deleteTodoInAllTodosArray };
+    const checkTodoItemDate = (todoItem) => {
+        let today = new Date();
+        let currentDate = new Date()
+       // let nextSevenDays = `${today.getMonth()+1}/${today.getDate()+7}/${today.getFullYear()}`;
+        let todoItemDate = new Date(todoItem.dueDate)
+       
+        if (todoItemDate.getDate() == currentDate.getDate()-1 
+        && todoItemDate.getMonth() == currentDate.getMonth() 
+        && todoItemDate.getFullYear() == currentDate.getFullYear()) {
+            todayTodos.push(todoItem)
+        }
+    }
+    //now make a delete todo item in today's todo if it was deleted
+
+    return { getAllTodos, createTodo, deleteTodo, editTodo, deleteTodoInAllTodosArray, getTodayTodos };
 })();
 
 export const project = (() => {
