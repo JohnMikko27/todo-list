@@ -115,7 +115,7 @@ export const futureTodosClicked = () => {
     const projectNameHeader = document.querySelector('#project-name-header')
     nextSevenDays.addEventListener('click', () => {
         displayFutureTodos();
-        projectNameHeader.textContent = 'Future Todos';
+        projectNameHeader.textContent = 'Future Tasks';
     })
 }
 
@@ -361,6 +361,8 @@ const deleteTaskInProject = () => {
         console.log(project.getCurrentProject())
         todo.deleteTodo(e.target.parentNode.parentNode.firstChild.textContent);
         todo.deleteTodoInAllTodosArray(e.target.parentNode.parentNode.firstChild.textContent);
+        todo.deleteTodayTodo(e.target.parentNode.parentNode.firstChild.textContent);
+        todo.deleteFutureTodo(e.target.parentNode.parentNode.firstChild.textContent);
         displayTasksInProject();
     }))
 }

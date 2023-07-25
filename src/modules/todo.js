@@ -79,9 +79,17 @@ export const todo = (() => {
             futureTodos.push(todoItem);
         } 
     }
-    //now make a delete todo item in today's todo if it was deleted
 
-    return { getAllTodos, createTodo, deleteTodo, editTodo, deleteTodoInAllTodosArray, getTodayTodos, deleteTodayTodo, getFutureTodos };
+    const deleteFutureTodo = (todoItem) => {
+        for (let i = 0; i < getFutureTodos().length; i++) {
+            if (getFutureTodos()[i].title == todoItem) {
+                getFutureTodos().splice(i,1);
+            }
+        }
+    }
+    
+
+    return { getAllTodos, createTodo, deleteTodo, editTodo, deleteTodoInAllTodosArray, getTodayTodos, deleteTodayTodo, getFutureTodos, deleteFutureTodo };
 })();
 
 export const project = (() => {
