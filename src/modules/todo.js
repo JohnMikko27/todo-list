@@ -3,10 +3,11 @@
 export const todo = (() => {
     let allTodos = [];
     let todayTodos = [];
-    let nextWeekTodos = [];
+    let futureTodos = [];
     
     const getAllTodos = () => allTodos;
     const getTodayTodos = () => todayTodos;
+    const getFutureTodos = () => futureTodos;
 
     const createTodo = (title, description, dueDate) => {
         const todoItem = {
@@ -15,11 +16,12 @@ export const todo = (() => {
             dueDate, 
         };
 
-        checkTodoItemDate(todoItem)
+        addTodayTodo(todoItem);
+        addFutureTodos(todoItem);
         allTodos.push(todoItem);
         project.getCurrentProject().taskArr.push(todoItem);
     }
-
+//deletes todo in the current project
     const deleteTodo = (todoItem) => {
         for (let i = 0; i < project.getCurrentProject().taskArr.length; i++) {
             if (project.getCurrentProject().taskArr[i].title == todoItem)  {
@@ -46,21 +48,40 @@ export const todo = (() => {
         }
     }
 
-    const checkTodoItemDate = (todoItem) => {
-        let today = new Date();
+    const addTodayTodo = (todoItem) => {
         let currentDate = new Date()
-       // let nextSevenDays = `${today.getMonth()+1}/${today.getDate()+7}/${today.getFullYear()}`;
         let todoItemDate = new Date(todoItem.dueDate)
-       
-        if (todoItemDate.getDate() == currentDate.getDate()-1 
+        
+        if (todoItemDate.getDate()+1 == currentDate.getDate() 
         && todoItemDate.getMonth() == currentDate.getMonth() 
         && todoItemDate.getFullYear() == currentDate.getFullYear()) {
             todayTodos.push(todoItem)
         }
     }
+
+    const deleteTodayTodo = (todoItem) => {
+        for (let i = 0; i < getTodayTodos().length; i++) {
+            if (getTodayTodos()[i].title == todoItem) {
+                getTodayTodos().splice(i,1);
+            }
+        }
+    }
+
+    const addFutureTodos = (todoItem) => {
+        let currentDate = new Date()
+        let todoItemDate = new Date(todoItem.dueDate)
+       
+        if (todoItemDate.getFullYear() > currentDate.getFullYear()) {
+            futureTodos.push(todoItem);
+        } else if (todoItemDate.getMonth() > currentDate.getMonth()) {
+            futureTodos.push(todoItem);
+        } else if (todoItemDate.getDate()+1 > currentDate.getDate()) {
+            futureTodos.push(todoItem);
+        } 
+    }
     //now make a delete todo item in today's todo if it was deleted
 
-    return { getAllTodos, createTodo, deleteTodo, editTodo, deleteTodoInAllTodosArray, getTodayTodos };
+    return { getAllTodos, createTodo, deleteTodo, editTodo, deleteTodoInAllTodosArray, getTodayTodos, deleteTodayTodo, getFutureTodos };
 })();
 
 export const project = (() => {

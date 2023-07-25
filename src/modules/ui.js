@@ -110,6 +110,39 @@ export const allTasksClicked = () => {
     });
 }
 
+export const futureTodosClicked = () => {
+    const nextSevenDays = document.querySelector('#this-week');
+    const projectNameHeader = document.querySelector('#project-name-header')
+    nextSevenDays.addEventListener('click', () => {
+        displayFutureTodos();
+        projectNameHeader.textContent = 'Future Todos';
+    })
+}
+
+const displayFutureTodos = () => {
+    clearTaskContainer();
+    const tasks = document.querySelector('#tasks')
+
+    for (let i = 0; i < todo.getFutureTodos().length; i++) {
+        let taskContainer = document.createElement('div');
+        let title = document.createElement('div');
+        let description = document.createElement('div');
+        let dueDate = document.createElement('div');
+
+        title.textContent = todo.getFutureTodos()[i].title;
+        description.textContent = todo.getFutureTodos()[i].description;
+        dueDate.textContent = todo.getFutureTodos()[i].dueDate;
+
+        taskContainer.classList.add('task-container');
+
+        taskContainer.appendChild(title);
+        taskContainer.appendChild(description);
+        taskContainer.appendChild(dueDate)
+
+        tasks.appendChild(taskContainer);
+    }
+}
+
 export const displayProjects = () => {
     const projectContainer = document.querySelector('#project-container');
     projectContainer.textContent = ' ';
@@ -146,6 +179,7 @@ export const showTasksInProject = () => {
         displayTasksInProject();
     }))
 }
+
 //have to add a delete tasks function that deletes the tasks on the page if the current project is the one that got deleted
 //because it still shows the previous tasks even if that project got deleted
 const displayTasksInProject = () => {
