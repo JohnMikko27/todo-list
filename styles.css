@@ -1,6 +1,7 @@
 :root {
   --bgColor1: #3f8fdf;
   --bgColor2: rgba(225, 223, 223, 0.478);
+  --hoverColor: rgb(217, 217, 217);
 }
 
 html,
@@ -68,9 +69,13 @@ body {
   align-items: center;
 }
 
+.project-clicked {
+  background-color: var(--bgColor1);
+}
+
 .project:hover {
   cursor: pointer;
-  background-color: red;
+  background-color: var(--hoverColor);
 }
 
 #all-tasks:hover,
