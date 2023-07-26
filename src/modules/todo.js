@@ -95,6 +95,7 @@ export const todo = (() => {
 export const project = (() => {
     let projects = []
     let currentProject;
+    let previousProject;
 
     const getProjects = () => projects;
 

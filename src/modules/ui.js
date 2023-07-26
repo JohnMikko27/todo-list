@@ -88,11 +88,13 @@ export const displayTodayTodos = () => {
 
 export const todayTasksClicked = () => {
     const today = document.querySelector('#today');
+    const addTask = document.querySelector('#add-task');
     const projectNameHeader = document.querySelector('#project-name-header');
 
     today.addEventListener('click', (e) => {
         displayTodayTodos();
         projectNameHeader.textContent = "Today's Tasks";
+        addTask.classList.add('hidden');
     })
 }
 
@@ -103,19 +105,25 @@ task button is clicked, make the tasks container blank then display all the task
 */
 export const allTasksClicked = () => {
     const allTasksButton = document.querySelector('#all-tasks');
-    const projectNameHeader = document.querySelector('#project-name-header')
+    const addTask = document.querySelector('#add-task');
+    const projectNameHeader = document.querySelector('#project-name-header');
+
     allTasksButton.addEventListener('click', (e) => {
         displayAllTodos()
         projectNameHeader.textContent = 'All Tasks';
+        addTask.classList.add('hidden');
     });
 }
 
 export const futureTodosClicked = () => {
     const nextSevenDays = document.querySelector('#this-week');
-    const projectNameHeader = document.querySelector('#project-name-header')
+    const addTask = document.querySelector('#add-task');
+    const projectNameHeader = document.querySelector('#project-name-header');
+
     nextSevenDays.addEventListener('click', () => {
         displayFutureTodos();
         projectNameHeader.textContent = 'Future Tasks';
+        addTask.classList.add('hidden');
     })
 }
 
@@ -145,6 +153,8 @@ const displayFutureTodos = () => {
 
 export const displayProjects = () => {
     const projectContainer = document.querySelector('#project-container');
+    const addTask = document.querySelector('#add-task');
+    addTask.classList.remove('hidden');
     projectContainer.textContent = ' ';
 
     for (let i = 0; i < project.getProjects().length; i++) {
@@ -169,15 +179,28 @@ export const displayProjects = () => {
 //when any of the projects are clicked
 export const showTasksInProject = () => {
     const projects = document.querySelectorAll('.project');
-    const projectNameHeader = document.querySelector('#project-name-header')
+    const projectNameHeader = document.querySelector('#project-name-header');
+    const addTask = document.querySelector('#add-task');
 
     projects.forEach(item => item.addEventListener('click', (e) => {
-        projectNameHeader.textContent = `${e.target.textContent}`
-        console.log('project clicked')
+        projectNameHeader.textContent = `${e.target.textContent}`;
+       
        // clearTaskContainer();
         project.setCurrentProject(e.target.textContent);
+       // showCurrentProject(e.target);
         displayTasksInProject();
+        addTask.classList.remove('hidden');
     }))
+}
+
+const showCurrentProject = (projectItem) => {
+    projectItem.classList.add('project-clicked')
+}
+
+const removeHover = () => {
+    for (let i = 0; i < project.getProjects().length; i++) {
+        project.getProjects()[i].classList.remove('project-clicked');
+    }
 }
 
 //have to add a delete tasks function that deletes the tasks on the page if the current project is the one that got deleted
@@ -366,6 +389,8 @@ const deleteTaskInProject = () => {
         displayTasksInProject();
     }))
 }
+
+
 
 
 /*
