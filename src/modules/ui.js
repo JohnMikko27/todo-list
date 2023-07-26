@@ -19,7 +19,7 @@ export const makeTodo = () => {
 
         taskForm.reset();
         taskForm.classList.toggle('hidden');
-    })
+    }, {once: true})
 }   
 
 //attaches eventListener for when projectForm is submitted
@@ -35,7 +35,7 @@ export const makeProject = () => {
 
         projectForm.reset();
         projectForm.classList.toggle('hidden');
-    })
+    }, {once:true})
 }
 
 //make this the display 'ALL TODOS' function when 'ALL TASKS' is clicked
@@ -280,16 +280,20 @@ export const deleteProject = () => {
 export const addTask = () => {
     const addTask = document.querySelector('#add-task');
     const taskForm = document.querySelector('#task-form');
-    addTask.addEventListener('click', () => taskForm.classList.toggle('hidden'));
-    makeTodo();
+    addTask.addEventListener('click', () => {
+        taskForm.classList.toggle('hidden');
+        makeTodo();
+    });
 }
 
 //shows hidden project form
 export const addProject = () => {
     const addProject = document.querySelector('#add-project-button');
     const projectForm = document.querySelector('#project-form');
-    addProject.addEventListener('click', () => projectForm.classList.toggle('hidden'));
-    makeProject();
+    addProject.addEventListener('click', () => {
+        projectForm.classList.toggle('hidden');
+        makeProject();
+    });
 }
 
 //show close button when hover over project later
@@ -308,10 +312,10 @@ export const taskOptionClicked = () => {
     const taskOptions = document.querySelectorAll('.task-options')
 
     taskOptions.forEach(element => element.addEventListener('click', (e) => {
-
+        
         e.target.parentNode.parentNode.lastChild.classList.toggle('hidden');
         deleteTaskInProject();
-      //  editTaskInProject();
+        editTaskInProject();
         /* 
          * 
          * if clicked outside of the element, then make it hidden/or delete it
@@ -335,15 +339,18 @@ export const taskOptionClicked = () => {
 
 
 //editing a task only works once, after u edit a task once, it breaks
-/*
+
 const editTaskInProject = () => {
     //for each editTask button clcicked, show the form with its current values then attach form eventListener
     
     const editButtons = document.querySelectorAll('.task-edit-button');
+    const editTaskForm = document.querySelector('#edit-task-form');
+
     editButtons.forEach(btn => btn.addEventListener('click', (e) => {
         console.log('hi')
+        
         editTaskForm.classList.toggle('hidden');
-        const editTaskForm = document.querySelector('#edit-task-form')
+        
         let title = document.querySelector('#edit-title');
         let description = document.querySelector('#edit-description');
         let dueDate = document.querySelector('#edit-date');
@@ -355,8 +362,8 @@ const editTaskInProject = () => {
         let oldTitle = e.target.parentNode.parentNode.children.item(0).textContent;
 
         editTaskForm.addEventListener('submit', (e) => {
-            console.log('submitted')
             e.preventDefault();
+            console.log('submitted');
 
             let newTitle = document.querySelector('#edit-title').value;
             let newDescription = document.querySelector('#edit-description').value;
@@ -364,16 +371,17 @@ const editTaskInProject = () => {
 
             todo.editTodo(oldTitle, newTitle, newDescription, newDueDate);
 
-            
-
             editTaskForm.reset();
             editTaskForm.classList.toggle('hidden');
             displayTasksInProject();
-        })
+        }, {once: true})
     }))
 
 }
-*/
+
+
+
+
 
 const deleteTaskInProject = () => {
     const deleteButton = document.querySelectorAll('.task-delete-button');
