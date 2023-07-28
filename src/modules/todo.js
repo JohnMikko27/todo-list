@@ -39,15 +39,25 @@ export const todo = (() => {
     }
     
     const editTodo = (oldTitle, newTitle, newDescription, newDueDate) => {
+        let todoItem;
         for (let i = 0; i < project.getCurrentProject().taskArr.length; i++) {
             if (project.getCurrentProject().taskArr[i].title == oldTitle) {
                 project.getCurrentProject().taskArr[i].title = newTitle;
                 project.getCurrentProject().taskArr[i].description = newDescription;
                 project.getCurrentProject().taskArr[i].dueDate = newDueDate;
+                todoItem = project.getCurrentProject().taskArr[i];
             }
         }
+        deleteTodayTodo(todoItem.title);
+        deleteFutureTodo(todoItem.title);
+        addTodayTodo(todoItem);
+        addFutureTodos(todoItem);
+
+
     }
 
+    //maybe after editing the task, delete it from todayTodos/futureTodos then run addTodayTodo/addFutureTodo so that it gets added to the 
+//correct one after editing it
     const addTodayTodo = (todoItem) => {
         let currentDate = new Date()
         let todoItemDate = new Date(todoItem.dueDate)

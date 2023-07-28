@@ -205,6 +205,7 @@ const removeHover = () => {
 
 //have to add a delete tasks function that deletes the tasks on the page if the current project is the one that got deleted
 //because it still shows the previous tasks even if that project got deleted
+
 const displayTasksInProject = () => {
     clearTaskContainer();
     let tasks = document.querySelector('#tasks')
@@ -338,10 +339,13 @@ export const taskOptionClicked = () => {
  */
 
 
-//editing a task only works once, after u edit a task once, it breaks
 
+
+
+
+//edit function works now but after editing them, the tasks are still in the futureTodos/Today todos even if their dates have changed
+//it is because I haven't taken them out or checked if i should take them out of those corresponding arrays
 const editTaskInProject = () => {
-    //for each editTask button clcicked, show the form with its current values then attach form eventListener
     
     const editButtons = document.querySelectorAll('.task-edit-button');
     const editTaskForm = document.querySelector('#edit-task-form');
