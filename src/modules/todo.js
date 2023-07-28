@@ -21,7 +21,8 @@ export const todo = (() => {
         allTodos.push(todoItem);
         project.getCurrentProject().taskArr.push(todoItem);
     }
-//deletes todo in the current project
+
+    //deletes todo in the current project
     const deleteTodo = (todoItem) => {
         for (let i = 0; i < project.getCurrentProject().taskArr.length; i++) {
             if (project.getCurrentProject().taskArr[i].title == todoItem)  {
@@ -55,8 +56,6 @@ export const todo = (() => {
         addFutureTodos(todoItem);
     }
 
-    //maybe after editing the task, delete it from todayTodos/futureTodos then run addTodayTodo/addFutureTodo so that it gets added to the 
-//correct one after editing it
     const addTodayTodo = (todoItem) => {
         let currentDate = new Date()
         let todoItemDate = new Date(todoItem.dueDate)
@@ -96,7 +95,6 @@ export const todo = (() => {
             }
         }
     }
-    
 
     return { getAllTodos, createTodo, deleteTodo, editTodo, deleteTodoInAllTodosArray, getTodayTodos, deleteTodayTodo, getFutureTodos, deleteFutureTodo };
 })();
@@ -139,30 +137,10 @@ export const project = (() => {
         }
     }
 
-
     return { createProject, getProjects, getCurrentProject, setCurrentProject, createDefaultProject, deleteProject }
 })()
 
 /*
- * Task1: create a delete function that deletes a project and/or tasks
-First I need to add the 3 dots as an option to each task and project
-When delete is clicked
-Delete that project/task from its corresponding array and then call displayProjects/displayTasksInProject again
-*/
-
-
-
-
-
- /* Task2: create an edit function where you can edit project's name and/or a task
-When the edit button is clicked, 
-show a container/div/form that contains that task's current name, description and date
-will have to add the current name, description and date to that form 
-and then when form is submitted
-display tasks or project again so that it seems it was edited
-
-
-
  * Task3: create a function that changes the color of the current project so that we know which project the tasks are going into
 This will be easy; just use the getCurrentProject and change the color of that
  */

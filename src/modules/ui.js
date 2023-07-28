@@ -168,12 +168,15 @@ export const displayProjects = () => {
         options.classList.add('project-options');
         //options.classList.add('hidden');
 
+        if (project.getProjects()[i] == project.getCurrentProject()) {
+            div.classList.add('project-clicked');
+        }
+
         div.appendChild(options);
         projectContainer.appendChild(div);
     }
     deleteProject();
     showTasksInProject();
-    
 }
 //rename this function later
 //when any of the projects are clicked
@@ -184,23 +187,12 @@ export const showTasksInProject = () => {
 
     projects.forEach(item => item.addEventListener('click', (e) => {
         projectNameHeader.textContent = `${e.target.textContent}`;
-       
-       // clearTaskContainer();
+        console.log('hi')
         project.setCurrentProject(e.target.textContent);
-       // showCurrentProject(e.target);
         displayTasksInProject();
+        displayProjects();
         addTask.classList.remove('hidden');
     }))
-}
-
-const showCurrentProject = (projectItem) => {
-    projectItem.classList.add('project-clicked')
-}
-
-const removeHover = () => {
-    for (let i = 0; i < project.getProjects().length; i++) {
-        project.getProjects()[i].classList.remove('project-clicked');
-    }
 }
 
 //have to add a delete tasks function that deletes the tasks on the page if the current project is the one that got deleted
@@ -249,8 +241,6 @@ const displayTasksInProject = () => {
         tasks.appendChild(taskContainer);
     }
     taskOptionClicked();
-   // editTaskInProject();
-    //deleteTaskInProject();
 }
 
 export const clearTaskContainer = () => {
@@ -308,7 +298,6 @@ const showCloseButton = () => {
     }))
 }*/
 
-
 export const taskOptionClicked = () => {
     const taskOptions = document.querySelectorAll('.task-options')
 
@@ -326,43 +315,20 @@ export const taskOptionClicked = () => {
     }))
 }
 
-
-/*
- * When each task-options is clicked, show an edit/delete button which allows you to either edit the task or delete the task
- * Edit: 
- * When edit button is clicked, 
- * show a pop up form with the inputs (title, description, dueDate) being the value of that current task
- * make this into a form that shows over everything else
- * when the form is submitted, change that task's title, description, dueDate, etc. 
- * Do this ^^^ by going through the currentProject's taskArr and then change the corresponding task's title, description, dueDate
- * then displayTasksInProject again
- */
-
-
-
-
-
-
-//edit function works now but after editing them, the tasks are still in the futureTodos/Today todos even if their dates have changed
-//it is because I haven't taken them out or checked if i should take them out of those corresponding arrays
 const editTaskInProject = () => {
-    
     const editButtons = document.querySelectorAll('.task-edit-button');
     const editTaskForm = document.querySelector('#edit-task-form');
 
     editButtons.forEach(btn => btn.addEventListener('click', (e) => {
         console.log('hi')
-        
         editTaskForm.classList.toggle('hidden');
         
         let title = document.querySelector('#edit-title');
         let description = document.querySelector('#edit-description');
         let dueDate = document.querySelector('#edit-date');
-
         title.value = e.target.parentNode.parentNode.children.item(0).textContent;
         description.value = e.target.parentNode.parentNode.children.item(1).textContent;
         dueDate.value = e.target.parentNode.parentNode.children.item(2).textContent;
-
         let oldTitle = e.target.parentNode.parentNode.children.item(0).textContent;
 
         editTaskForm.addEventListener('submit', (e) => {
@@ -380,12 +346,7 @@ const editTaskInProject = () => {
             displayTasksInProject();
         }, {once: true})
     }))
-
 }
-
-
-
-
 
 const deleteTaskInProject = () => {
     const deleteButton = document.querySelectorAll('.task-delete-button');

@@ -70,7 +70,7 @@ body {
 }
 
 .project-clicked {
-  background-color: var(--bgColor1);
+  background-color: #9dc1e5;
 }
 
 .project:hover {
