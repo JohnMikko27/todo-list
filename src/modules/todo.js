@@ -48,12 +48,11 @@ export const todo = (() => {
                 todoItem = project.getCurrentProject().taskArr[i];
             }
         }
+        //updates today/future todo array
         deleteTodayTodo(todoItem.title);
         deleteFutureTodo(todoItem.title);
         addTodayTodo(todoItem);
         addFutureTodos(todoItem);
-
-
     }
 
     //maybe after editing the task, delete it from todayTodos/futureTodos then run addTodayTodo/addFutureTodo so that it gets added to the 
