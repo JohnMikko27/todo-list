@@ -2,6 +2,7 @@ import { todo, project } from "./todo";
 import star from '../icons/star-outline.svg'
 import close from '../icons/close.png'
 import option from '../icons/more-vertical-alt.svg'
+import { addProjectToLocalStorage } from "./localStorage";
 
 //attaches eventListener for when taskForm is submitted
 export const makeTodo = () => {

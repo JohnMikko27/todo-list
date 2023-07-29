@@ -1,4 +1,4 @@
-// can create to do item, delete, edit, etc. 
+import { addProjectToLocalStorage } from "./localStorage";
 
 export const todo = (() => {
     let allTodos = [];
@@ -112,6 +112,7 @@ export const project = (() => {
             taskArr: [],
         }
         projects.push(projectItem);
+        addProjectToLocalStorage(projectItem);
     }
 
     const getCurrentProject = () => currentProject;
@@ -139,8 +140,3 @@ export const project = (() => {
 
     return { createProject, getProjects, getCurrentProject, setCurrentProject, createDefaultProject, deleteProject }
 })()
-
-/*
- * Task3: create a function that changes the color of the current project so that we know which project the tasks are going into
-This will be easy; just use the getCurrentProject and change the color of that
- */
