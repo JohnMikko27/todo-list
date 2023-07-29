@@ -54,3 +54,14 @@ export const addProjectToLocalStorage = (project) => {
         localStorage.setItem('projects', JSON.stringify(projectsArray));
     }
 }
+
+export const addTaskToProject = (todoItem) => {
+    let placeHolder = localStorage.getItem('projects');
+    let projectsArray = JSON.parse(placeHolder);
+    for (let i = 0; i < projectsArray.length; i++) {
+        if (projectsArray[i].projectName == project.getCurrentProject().projectName) {
+            projectsArray[i].taskArr.push(todoItem);
+        }
+    }
+    localStorage.setItem('projects', JSON.stringify(projectsArray));
+}

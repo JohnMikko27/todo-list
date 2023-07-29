@@ -1,4 +1,4 @@
-import { addProjectToLocalStorage } from "./localStorage";
+import { addProjectToLocalStorage, addTaskToProject } from "./localStorage";
 
 export const todo = (() => {
     let allTodos = [];
@@ -20,6 +20,7 @@ export const todo = (() => {
         addFutureTodos(todoItem);
         allTodos.push(todoItem);
         project.getCurrentProject().taskArr.push(todoItem);
+        addTaskToProject(todoItem);
     }
 
     //deletes todo in the current project
