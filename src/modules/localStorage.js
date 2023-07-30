@@ -37,7 +37,7 @@ export const onDomLoad = () => {
 
 
 export const addProjectToLocalStorage = (project) => {
-    // if it exists already
+    //if it doesn't exist yet
     if (!(localStorage.getItem('projects'))) {
         localStorage.setItem('projects', JSON.stringify([]));
     }
@@ -77,3 +77,17 @@ export const addTaskToProjectInLocalStorage = (todoItem) => {
     localStorage.setItem('projects', JSON.stringify(projectsArray));
 }
 
+export const deleteTaskInProjectInLocalStorage = (todoItem) => {
+    let placeHolder = localStorage.getItem('projects');
+    let projectsArray = JSON.parse(placeHolder);
+    for (let i = 0; i < projectsArray.length; i++) {
+        if (projectsArray[i].projectName == project.getCurrentProject().projectName) {
+            for (let j = 0; j < projectsArray[i].taskArr.length; j++) {
+                if (projectsArray[i].taskArr[j].title == todoItem) {
+                    projectsArray[i].taskArr.splice(j, 1);
+                }
+            }
+        }
+    }
+    localStorage.setItem('projects', JSON.stringify(projectsArray));
+}
