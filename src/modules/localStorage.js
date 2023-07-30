@@ -55,7 +55,18 @@ export const addProjectToLocalStorage = (project) => {
     }
 }
 
-export const addTaskToProject = (todoItem) => {
+export const deleteProjectFromLocalStorage = (name) => {
+    let placeHolder = localStorage.getItem('projects');
+    let projectsArray = JSON.parse(placeHolder);
+    for (let i = 0; i < projectsArray.length; i++) {
+        if (projectsArray[i].projectName == name) {
+            projectsArray.splice(i, 1);
+        }
+    }
+    localStorage.setItem('projects', JSON.stringify(projectsArray));
+}
+
+export const addTaskToProjectInLocalStorage = (todoItem) => {
     let placeHolder = localStorage.getItem('projects');
     let projectsArray = JSON.parse(placeHolder);
     for (let i = 0; i < projectsArray.length; i++) {
@@ -65,3 +76,4 @@ export const addTaskToProject = (todoItem) => {
     }
     localStorage.setItem('projects', JSON.stringify(projectsArray));
 }
+
