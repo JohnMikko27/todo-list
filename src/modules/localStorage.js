@@ -35,29 +35,23 @@ export const onDomLoad = () => {
 
 }
 
-
 export const addProjectToLocalStorage = (project) => {
     //if it doesn't exist yet
     if (!(localStorage.getItem('projects'))) {
         localStorage.setItem('projects', JSON.stringify([]));
     }
-    if (localStorage.getItem('projects')) {
-        let placeHolder = localStorage.getItem('projects');
-        let projectsArray = JSON.parse(placeHolder);
-
-        for (let i = 0; i < projectsArray.length; i++) {
-            if (projectsArray[i].projectName == project.projectName) {
-                projectsArray.splice(i, 1)
-            }
+    let projectsArray = JSON.parse(localStorage.getItem('projects'));
+    for (let i = 0; i < projectsArray.length; i++) {
+        if (projectsArray[i].projectName == project.projectName) {
+            projectsArray.splice(i, 1)
         }
-        projectsArray.push(project);
-        localStorage.setItem('projects', JSON.stringify(projectsArray));
     }
+    projectsArray.push(project);
+    localStorage.setItem('projects', JSON.stringify(projectsArray));
 }
 
 export const deleteProjectFromLocalStorage = (name) => {
-    let placeHolder = localStorage.getItem('projects');
-    let projectsArray = JSON.parse(placeHolder);
+    let projectsArray = JSON.parse(localStorage.getItem('projects'));
     for (let i = 0; i < projectsArray.length; i++) {
         if (projectsArray[i].projectName == name) {
             projectsArray.splice(i, 1);
@@ -67,8 +61,7 @@ export const deleteProjectFromLocalStorage = (name) => {
 }
 
 export const addTaskToProjectInLocalStorage = (todoItem) => {
-    let placeHolder = localStorage.getItem('projects');
-    let projectsArray = JSON.parse(placeHolder);
+    let projectsArray = JSON.parse(localStorage.getItem('projects'));
     for (let i = 0; i < projectsArray.length; i++) {
         if (projectsArray[i].projectName == project.getCurrentProject().projectName) {
             projectsArray[i].taskArr.push(todoItem);
@@ -78,8 +71,7 @@ export const addTaskToProjectInLocalStorage = (todoItem) => {
 }
 
 export const deleteTaskInProjectInLocalStorage = (todoItem) => {
-    let placeHolder = localStorage.getItem('projects');
-    let projectsArray = JSON.parse(placeHolder);
+    let projectsArray = JSON.parse(localStorage.getItem('projects'));
     for (let i = 0; i < projectsArray.length; i++) {
         if (projectsArray[i].projectName == project.getCurrentProject().projectName) {
             for (let j = 0; j < projectsArray[i].taskArr.length; j++) {
@@ -92,38 +84,117 @@ export const deleteTaskInProjectInLocalStorage = (todoItem) => {
     localStorage.setItem('projects', JSON.stringify(projectsArray));
 }
 
-
 /*
  * Everytiime something is added in all/today/future todos, add it to the corresponding item in local storage also
  * and everyrtime something is deleted/edited in all/today/future todos, delete/edit it in the local storage also
  */
+
+// make the add/delete todos more efficient
+//combine the addtodo functions and create one whole function that takes the todoItem 
+//and the name of the array it uses and have conditional statements correspondingly
+//same thing with the deleteTodo functions
 
 export const addTodoToAllTodosInLocalStoraage = (todoItem) => {
     //if it doesn't exist yet
     if (!(localStorage.getItem('allTodos'))) {
         localStorage.setItem('allTodos', JSON.stringify([]));
     }
-
-    if (localStorage.getItem('allTodos')) {
-        let placeholder = localStorage.getItem('allTodos');
-        let allTodos = JSON.parse(placeholder);
-
-        allTodos.push(todoItem);
-        localStorage.setItem('allTodos', JSON.stringify(allTodos));
-    }
+    
+    let allTodos = JSON.parse(localStorage.getItem('allTodos'));
+    allTodos.push(todoItem);
+    localStorage.setItem('allTodos', JSON.stringify(allTodos));
+    
 }
 
 export const deleteTodoInAllTodosInLocalStorage = (name) => {
     if (localStorage.getItem('allTodos')) {
-        let placeholder = localStorage.getItem('allTodos');
-        let allTodos = JSON.parse(placeholder);
+       let allTodos = JSON.parse(localStorage.getItem('allTodos'));
 
         for (let i = 0; i < allTodos.length; i++) {
             if (allTodos[i].title == name) {
                 allTodos.splice(i, 1);
             }
         }
-        
         localStorage.setItem('allTodos', JSON.stringify(allTodos));
+    }
+}
+
+export const addTodoToTodayTodosInLocalStorage = (todoItem) => {
+    //if it doesn't exist yet
+    if (!(localStorage.getItem('todayTodos'))) {
+        localStorage.setItem('todayTodos', JSON.stringify([]));
+    }
+    let placeholder = localStorage.getItem('todayTodos');
+    let todayTodos = JSON.parse(placeholder);
+    todayTodos.push(todoItem);
+    localStorage.setItem('todayTodos', JSON.stringify(todayTodos));
+}   
+
+export const deleteTodayTodoInLocalStorage = (name) => {
+    if (localStorage.getItem('todayTodos')) {
+        let todayTodos = JSON.parse(localStorage.getItem('todayTodos'));
+        for (let i = 0; i < todayTodos.length; i++) {
+            if (todayTodos[i].title == name) {
+                todayTodos.splice(i, 1);
+            }
+        }
+        localStorage.setItem('todayTodos', JSON.stringify(todayTodos));
+    }
+}
+
+export const addFutureTodoInLocalStorage = (todoItem) => {
+    if (!(localStorage.getItem('futureTodos'))) {
+        localStorage.setItem('futureTodos', JSON.stringify([]))
+    }
+    const futureTodos = JSON.parse(localStorage.getItem('futureTodos'));
+    futureTodos.push(todoItem);
+    localStorage.setItem('futureTodos', JSON.stringify(futureTodos));
+}
+
+export const deleteFutureTodoInLocalStorage = (name) => {
+    const futureTodos = JSON.parse(localStorage.getItem('futureTodos'));
+    for (let i = 0; i < futureTodos.length; i++) {
+        if (futureTodos[i].title == name) {
+            futureTodos.splice(i, 1);
+        }
+    }
+    localStorage.setItem('futureTodos', JSON.stringify(futureTodos));
+}
+
+//if you delete a project, it doesn't delete the todos in that project that are in the local storage -- got to fix this
+//first get the project that is about to be deleted
+//loop through the taskArr of that project and compare it to allTodos/todayTodos/futureTodos
+//if any of them match, then delete them
+
+export const deleteTasksWhenProjectDeletedInLocalStorage = (name) => {
+    const projects = JSON.parse(localStorage.getItem('projects'));
+    let currentProject;
+    for (let i = 0; i < projects.length; i++) {
+        if (projects[i].projectName == name) { 
+            currentProject = projects[i];
+            break;
+        }
+    }
+
+    const allTodos = JSON.parse(localStorage.getItem('allTodos'));
+    const todayTodos = JSON.parse(localStorage.getItem('todayTodos'));
+    const futureTodos = JSON.parse(localStorage.getItem('futureTodos'));
+    for (let i = 0; i < currentProject.taskArr.length; i++) {
+        for (let j = 0; j < allTodos.length; j++) {
+            if (currentProject.taskArr[i] == allTodos[j]) {
+                allTodos.splice(j, 1);
+            }
+        }
+        for (let k = 0; k < todayTodos.length; k++) {
+            if (currentProject.taskArr[i] == todayTodos[k]) {
+                todayTodos.splice(k, 1);
+            }
+        }
+        for (let l = 0; l < futureTodos.length; l++) {
+            if (currentProject.taskArr[i] == futureTodos[k]) {
+                futureTodos.splice(l, 1);
+            }
+        }
+
     }
 }
