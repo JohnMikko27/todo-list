@@ -91,3 +91,39 @@ export const deleteTaskInProjectInLocalStorage = (todoItem) => {
     }
     localStorage.setItem('projects', JSON.stringify(projectsArray));
 }
+
+
+/*
+ * Everytiime something is added in all/today/future todos, add it to the corresponding item in local storage also
+ * and everyrtime something is deleted/edited in all/today/future todos, delete/edit it in the local storage also
+ */
+
+export const addTodoToAllTodosInLocalStoraage = (todoItem) => {
+    //if it doesn't exist yet
+    if (!(localStorage.getItem('allTodos'))) {
+        localStorage.setItem('allTodos', JSON.stringify([]));
+    }
+
+    if (localStorage.getItem('allTodos')) {
+        let placeholder = localStorage.getItem('allTodos');
+        let allTodos = JSON.parse(placeholder);
+
+        allTodos.push(todoItem);
+        localStorage.setItem('allTodos', JSON.stringify(allTodos));
+    }
+}
+
+export const deleteTodoInAllTodosInLocalStorage = (name) => {
+    if (localStorage.getItem('allTodos')) {
+        let placeholder = localStorage.getItem('allTodos');
+        let allTodos = JSON.parse(placeholder);
+
+        for (let i = 0; i < allTodos.length; i++) {
+            if (allTodos[i].title == name) {
+                allTodos.splice(i, 1);
+            }
+        }
+        
+        localStorage.setItem('allTodos', JSON.stringify(allTodos));
+    }
+}

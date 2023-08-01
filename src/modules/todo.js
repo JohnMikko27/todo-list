@@ -1,4 +1,4 @@
-import { addProjectToLocalStorage, addTaskToProjectInLocalStorage, deleteProjectFromLocalStorage, deleteTaskInProjectInLocalStorage } from "./localStorage";
+import { addProjectToLocalStorage, addTaskToProjectInLocalStorage, addTodoToAllTodosInLocalStoraage, deleteProjectFromLocalStorage, deleteTaskInProjectInLocalStorage, deleteTodoInAllTodosInLocalStorage } from "./localStorage";
 
 export const todo = (() => {
     let allTodos = [];
@@ -19,6 +19,7 @@ export const todo = (() => {
         addTodayTodo(todoItem);
         addFutureTodos(todoItem);
         allTodos.push(todoItem);
+        addTodoToAllTodosInLocalStoraage(todoItem);
         project.getCurrentProject().taskArr.push(todoItem);
         addTaskToProjectInLocalStorage(todoItem);
     }
@@ -37,6 +38,7 @@ export const todo = (() => {
         for (let i = 0; i < getAllTodos().length; i++) {
             if (getAllTodos()[i].title == todoItem) {
                 getAllTodos().splice(i,1);
+                deleteTodoInAllTodosInLocalStorage(todoItem);
             }
         }
     }
