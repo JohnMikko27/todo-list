@@ -89,24 +89,11 @@ export const todo = (() => {
 
         todoItemDate.setDate(todoItemDate.getDate()+1)
         future.setDate(currentDate.getDate() + 1);
-        console.log(future)
-        console.log(todoItemDate)
-
+    
         if (todoItemDate >= future) {
             futureTodos.push(todoItem);
             addFutureTodoInLocalStorage(todoItem);
         }
-
-        /*if (todoItemDate.getFullYear() > currentDate.getFullYear()) {
-            futureTodos.push(todoItem);
-            addFutureTodoInLocalStorage(todoItem);
-        } else if (todoItemDate.getMonth() > currentDate.getMonth()) {
-            futureTodos.push(todoItem);
-            addFutureTodoInLocalStorage(todoItem);
-        } else if (todoItemDate.getDate() > currentDate.getDate()) {
-            futureTodos.push(todoItem);
-            addFutureTodoInLocalStorage(todoItem);
-        } */
     }
 
     const deleteFutureTodo = (todoItem) => {
@@ -156,7 +143,7 @@ export const project = (() => {
         for (let i = 0; i < projects.length; i++) {
             if (projects[i].projectName == name) {
                 projects.splice(i, 1);
-               // deleteTasksWhenProjectDeletedInLocalStorage(name);
+                deleteTasksWhenProjectDeletedInLocalStorage(name);
                 deleteProjectFromLocalStorage(name);
             }
         }

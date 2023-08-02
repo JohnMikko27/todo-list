@@ -180,21 +180,30 @@ export const deleteTasksWhenProjectDeletedInLocalStorage = (name) => {
     const todayTodos = JSON.parse(localStorage.getItem('todayTodos'));
     const futureTodos = JSON.parse(localStorage.getItem('futureTodos'));
     for (let i = 0; i < currentProject.taskArr.length; i++) {
-        for (let j = 0; j < allTodos.length; j++) {
-            if (currentProject.taskArr[i] == allTodos[j]) {
-                allTodos.splice(j, 1);
+        if (allTodos) {
+            for (let j = 0; j < allTodos.length; j++) {
+                if (currentProject.taskArr[i].title == allTodos[j].title) {
+                    allTodos.splice(j, 1);
+                }
             }
         }
-        for (let k = 0; k < todayTodos.length; k++) {
-            if (currentProject.taskArr[i] == todayTodos[k]) {
-                todayTodos.splice(k, 1);
+        if (todayTodos) {
+            for (let k = 0; k < todayTodos.length; k++) {
+                if (currentProject.taskArr[i].title == todayTodos[k].title) {
+                    todayTodos.splice(k, 1);
+                }
             }
         }
-        for (let l = 0; l < futureTodos.length; l++) {
-            if (currentProject.taskArr[i] == futureTodos[k]) {
-                futureTodos.splice(l, 1);
+        if (futureTodos) {
+            for (let l = 0; l < futureTodos.length; l++) {
+                if (currentProject.taskArr[i].title == futureTodos[l].title) {
+                    futureTodos.splice(l, 1);
+                }
             }
         }
-
     }
+    if (allTodos) localStorage.setItem('allTodos', JSON.stringify(allTodos));
+    if (todayTodos) localStorage.setItem('todayTodos', JSON.stringify(todayTodos));
+    if (futureTodos) localStorage.setItem('futureTodos', JSON.stringify(futureTodos));
+    
 }
