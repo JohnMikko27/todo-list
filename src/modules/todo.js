@@ -149,38 +149,5 @@ export const project = (() => {
         }
     }
 
-    const deleteTasksWhenProjectDeleted = (name) => {
-        let currentProject;
-        for (let i = 0; i < projects.length; i++) {
-            if (projects[i].projectName == name) { 
-                currentProject = projects[i];
-                break;
-            }
-        }
-        for (let i = 0; i < currentProject.taskArr.length; i++) {
-            if (todo.getAllTodos) {
-                for (let j = 0; j < todo.getAllTodos.length; j++) {
-                    if (currentProject.taskArr[i].title == todo.getAllTodos[j].title) {
-                        todo.getAllTodos.splice(j, 1);
-                    }
-                }
-            }
-            if (todo.getTodayTodos) {
-                for (let k = 0; k < todo.getTodayTodos.length; k++) {
-                    if (currentProject.taskArr[i].title == todo.getTodayTodos[k].title) {
-                        todo.getTodayTodos.splice(k, 1);
-                    }
-                }
-            }
-            if (futureTodos) {
-                for (let l = 0; l < futureTodos.length; l++) {
-                    if (currentProject.taskArr[i].title == futureTodos[l].title) {
-                        futureTodos.splice(l, 1);
-                    }
-                }
-            }
-        }
-    }
-
     return { createProject, getProjects, getCurrentProject, setCurrentProject, createDefaultProject, deleteProject }
 })()
