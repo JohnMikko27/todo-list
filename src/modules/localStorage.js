@@ -184,6 +184,7 @@ export const deleteTasksWhenProjectDeletedInLocalStorage = (name) => {
             for (let j = 0; j < allTodos.length; j++) {
                 if (currentProject.taskArr[i].title == allTodos[j].title) {
                     allTodos.splice(j, 1);
+                    todo.getAllTodos().splice(j, 1);
                 }
             }
         }
@@ -191,6 +192,7 @@ export const deleteTasksWhenProjectDeletedInLocalStorage = (name) => {
             for (let k = 0; k < todayTodos.length; k++) {
                 if (currentProject.taskArr[i].title == todayTodos[k].title) {
                     todayTodos.splice(k, 1);
+                    todo.getTodayTodos().splice(k, 1);
                 }
             }
         }
@@ -198,6 +200,7 @@ export const deleteTasksWhenProjectDeletedInLocalStorage = (name) => {
             for (let l = 0; l < futureTodos.length; l++) {
                 if (currentProject.taskArr[i].title == futureTodos[l].title) {
                     futureTodos.splice(l, 1);
+                    todo.getFutureTodos().splice(l, 1);
                 }
             }
         }
