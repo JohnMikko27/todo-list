@@ -2,7 +2,6 @@ import { todo, project } from "./todo";
 import star from '../icons/star-outline.svg'
 import close from '../icons/close.png'
 import option from '../icons/more-vertical-alt.svg'
-import { addProjectToLocalStorage } from "./localStorage";
 
 //attaches eventListener for when taskForm is submitted
 export const makeTodo = () => {
@@ -157,7 +156,7 @@ export const displayProjects = () => {
     const addTask = document.querySelector('#add-task');
     addTask.classList.remove('hidden');
     projectContainer.textContent = ' ';
-
+    let l = project.getProjects();
     for (let i = 0; i < project.getProjects().length; i++) {
        
         let div = document.createElement('div');
@@ -364,15 +363,7 @@ const deleteTaskInProject = () => {
     }))
 }
 
-
-
-
-/*
-editing a task once works, but after correctly editing, when i try to edit a second time 
-- even if the task is in a different project-it breaks 
-
-It's because the eventListener for submitting the form run twice on the second time i try to submit a form (second time editing)
-so it makes the task blank because it runs twice
-
-Maybe learn about bubbling and propagation to hopefully fix this
-*/
+export const clearProjectHeader = () => {
+    const projectHeader = document.querySelector('#project-name-header');
+    projectHeader.textContent = ' ';
+}

@@ -27,13 +27,6 @@ import { todo, project } from "./todo";
  * everytime I edit or add to all/today/future to do arrays, I have to update the local storage
  * 
  */
-export const onDomLoad = () => {
-    localStorage.setItem('projects', [])
-    localStorage.setItem('allTodos', [])
-    localStorage.setItem('todayTodos', [])
-    localStorage.setItem('futureTodos', [])
-
-}
 
 export const addProjectToLocalStorage = (project) => {
     //if it doesn't exist yet
