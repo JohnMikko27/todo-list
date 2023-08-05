@@ -1,6 +1,13 @@
 import { todo, project } from "./todo";
 import { displayProjects } from "./ui";
 
+
+
+/*
+!!!!!! I need to create an initila default project so that there is no error
+maybe with some tasks in that project
+*/
+
 export const onload = () => {
     window.addEventListener('load', (e) => {
         addTodosToAllTodos();
