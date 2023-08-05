@@ -43,14 +43,23 @@ body {
   justify-self: start;
   align-self: start;
   font-size: 2rem;
+  margin-bottom: 1rem;
 }
 
 #home {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
-  justify-items: center;
+  justify-items: start;
   align-items: center;
   gap: 1rem;
+  padding-left: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+#home div {
+  height: 2rem;
+  display: flex;
+  align-items: center;
 }
 
 #projects {
@@ -61,12 +70,22 @@ body {
 #projects > div:first-child {
   justify-self: start;
   font-size: 2rem;
+  padding-bottom: 1rem;
 }
+
 
 .project {
   display: grid;
   grid-template-columns: 1fr 0.1fr;
   align-items: center;
+  height: 2rem;
+  padding-left: 1.25rem;
+}
+
+#project-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
 }
 
 .project-clicked {
@@ -106,6 +125,10 @@ img {
 .task-options:hover {
   cursor: pointer;
   background-color: rgb(216, 216, 216);
+}
+
+#tasks {
+  
 }
 
 .task-container {
