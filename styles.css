@@ -142,16 +142,14 @@ button:hover {
 
 #all-tasks:hover,
 #today:hover,
-#this-week:hover,
-#important:hover {
+#this-week:hover {
   cursor: pointer;
   background-color: var(--hoverColor2);
 }
 
 #all-tasks,
 #today,
-#this-week,
-#important {
+#this-week {
   width: 100%;
 }
 
@@ -172,7 +170,6 @@ img {
   height: auto;
 }
 
-.important:hover,
 .task-options:hover {
   cursor: pointer;
   background-color: rgb(216, 216, 216);
