@@ -87,7 +87,7 @@ export const deleteTaskInProjectInLocalStorage = (todoItem) => {
 //and the name of the array it uses and have conditional statements correspondingly
 //same thing with the deleteTodo functions
 
-export const addTodoToAllTodosInLocalStoraage = (todoItem) => {
+export const addTodoToAllTodosInLocalStorage = (todoItem) => {
     //if it doesn't exist yet
     if (!(localStorage.getItem('allTodos'))) {
         localStorage.setItem('allTodos', JSON.stringify([]));

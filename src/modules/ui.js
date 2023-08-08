@@ -318,10 +318,12 @@ export const taskOptionClicked = () => {
 const editTaskInProject = () => {
     const editButtons = document.querySelectorAll('.task-edit-button');
     const editTaskForm = document.querySelector('#edit-task-form');
+    const overlay = document.querySelector('#overlay')
 
     editButtons.forEach(btn => btn.addEventListener('click', (e) => {
         console.log('hi')
         editTaskForm.classList.toggle('hidden');
+        overlay.classList.toggle('hidden');
         
         let title = document.querySelector('#edit-title');
         let description = document.querySelector('#edit-description');
@@ -343,6 +345,7 @@ const editTaskInProject = () => {
 
             editTaskForm.reset();
             editTaskForm.classList.toggle('hidden');
+            overlay.classList.toggle('hidden');
             displayTasksInProject();
         }, {once: true})
     }))

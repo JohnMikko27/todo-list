@@ -1,4 +1,4 @@
-import { addFutureTodoInLocalStorage, addProjectToLocalStorage, addTaskToProjectInLocalStorage, addTodoToAllTodosInLocalStoraage, addTodoToTodayTodosInLocalStorage, deleteFutureTodoInLocalStorage, deleteProjectFromLocalStorage, deleteTaskInProjectInLocalStorage, deleteTasksWhenProjectDeletedInLocalStorage, deleteTodayTodoInLocalStorage, deleteTodoInAllTodosInLocalStorage } from "./localStorage";
+import { addFutureTodoInLocalStorage, addProjectToLocalStorage, addTaskToProjectInLocalStorage, addTodoToAllTodosInLocalStorage, addTodoToTodayTodosInLocalStorage, deleteFutureTodoInLocalStorage, deleteProjectFromLocalStorage, deleteTaskInProjectInLocalStorage, deleteTasksWhenProjectDeletedInLocalStorage, deleteTodayTodoInLocalStorage, deleteTodoInAllTodosInLocalStorage } from "./localStorage";
 
 export const todo = (() => {
     let allTodos = [];
@@ -19,7 +19,7 @@ export const todo = (() => {
         addTodayTodo(todoItem);
         addFutureTodos(todoItem);
         allTodos.push(todoItem);
-        addTodoToAllTodosInLocalStoraage(todoItem);
+        addTodoToAllTodosInLocalStorage(todoItem);
         project.getCurrentProject().taskArr.push(todoItem);
         addTaskToProjectInLocalStorage(todoItem);
     }
@@ -47,6 +47,7 @@ export const todo = (() => {
         let todoItem;
         for (let i = 0; i < project.getCurrentProject().taskArr.length; i++) {
             if (project.getCurrentProject().taskArr[i].title == oldTitle) {
+                let curr = project.getCurrentProject().taskArr;
                 project.getCurrentProject().taskArr[i].title = newTitle;
                 project.getCurrentProject().taskArr[i].description = newDescription;
                 project.getCurrentProject().taskArr[i].dueDate = newDueDate;
@@ -54,11 +55,20 @@ export const todo = (() => {
             }
         }
         //updates today/future todo array
-        deleteTodayTodo(todoItem.title);
-        deleteFutureTodo(todoItem.title);
+        deleteTodayTodo(oldTitle);
+        deleteFutureTodo(oldTitle);
         addTodayTodo(todoItem);
         addFutureTodos(todoItem);
+
+        deleteTaskInProjectInLocalStorage(oldTitle);
+        addTaskToProjectInLocalStorage(todoItem);
+        deleteTodoInAllTodosArray(oldTitle);
+        allTodos.push(todoItem);
+        addTodoToAllTodosInLocalStorage(todoItem);
     }
+    //when I edit it and then reload, it doesn't put the correct edited todo
+    //the todos in the future todo/today todo/ all todo arrays and project.taskArr arrays have incorrect todos after editing a todo
+    //i need to create a function that changes the todo in a project if that todo is edited
 
     const addTodayTodo = (todoItem) => {
         let currentDate = new Date();

@@ -35,7 +35,6 @@ body {
 */
 
 #left-side {
-  background-color: var(--bgColor2);
   padding: 1rem;
 }
 
@@ -74,7 +73,6 @@ body {
   padding-bottom: 1rem;
 }
 
-
 .project {
   display: grid;
   grid-template-columns: 1fr 0.1fr;
@@ -112,6 +110,7 @@ body {
 */
 #right-side {
   padding: 2rem;
+  background-color: var(--bgColor2);
 }
 
 #project-name-header {
@@ -132,7 +131,7 @@ img {
 #tasks {
   display: grid;
   grid-template-columns: 1fr;
-  gap: .35rem;
+  gap: 0.35rem;
 }
 
 .task-container {
@@ -142,7 +141,7 @@ img {
   border: 2px solid rgb(0, 0, 0);
   border-radius: 4px;
   font-size: 1.25rem;
-  padding: .5rem;
+  padding: 0.5rem;
   align-items: center;
 }
 
@@ -151,15 +150,32 @@ img {
   top: 120%;
   left: 95%;
   background-color: rgb(207, 207, 207);
-  padding: .25rem;
+  padding: 0.25rem;
   box-shadow: 1px 1px 3px 1px rgb(233, 233, 233);
   z-index: 1;
 }
 
-.task-delete-button:hover, 
+.task-delete-button:hover,
 .task-edit-button:hover {
   cursor: pointer;
   background-color: rgb(184, 184, 184);
+}
+
+#task-form {
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  background-color: white;
+}
+
+#task-form div {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+  margin-bottom: 0.35rem;
+}
+
+#task-form > div > input {
+  font-size: 1.25rem;
 }
 
 #edit-task-form {
@@ -168,6 +184,25 @@ img {
   left: 40%;
   z-index: 1;
 }
+
+.form-active {
+  background-color: white;
+  width: 35vw;
+  height: 15vh;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+#overlay {
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(50, 50, 50, 0.468);
+  opacity: 0.8;
+}
+
 /*
 * ------------------- form -------------------
 */

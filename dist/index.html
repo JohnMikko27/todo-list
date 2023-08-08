@@ -42,28 +42,26 @@
       </div>
       <div id="right-side">
         <!-- this is why home still shows up -->
-        <div id="project-name-header">Home</div>
+        <div id="project-name-header"></div>
         <div id="tasks">
           
         </div>
-        <div>
-          <form action="./main.js" method="post" id="task-form" class="hidden">
-            <div>
-              <label for="title">Title</label>
-              <input type="text" id="title" name="title">
-            </div>
-            <div>
-              <label for="description">Description</label>
-              <input type="text" id="description" name="description">
-            </div>
-            <div>
-              <label for="date">Date</label>
-              <input type="date" id="date" name="date">
-            </div>
-            <button type="submit" id="submit">Submit</button>
-          </form>
-          <button id="add-task">Add Task</button>
-        </div>
+        <form action="./main.js" method="post" id="task-form" class="hidden">
+          <div>
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" placeholder="What To Do?" required>
+          </div>
+          <div>
+            <label for="description">Description</label>
+            <input type="text" id="description" name="description" placeholder="Details (e.g. clean bedroom)" >
+          </div>
+          <div>
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date">
+          </div>
+          <button type="submit" id="submit">Submit</button>
+        </form>
+        <button id="add-task">Add Task</button>
       </div>
     </div>
 
@@ -82,5 +80,6 @@
       </div>
       <button type="submit" id="submit">Submit</button>
     </form>
+    <div id="overlay" class='hidden'></div>
   </body>
 </html>
