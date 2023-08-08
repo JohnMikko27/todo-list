@@ -14,6 +14,7 @@ export const onload = () => {
     window.addEventListener('load', (e) => {
         addTodosToAllTodos();
         addProjectsToProjectArray();
+        document.querySelector('#add-task').classList.toggle('hidden');
         // localStorage.setItem('projects', JSON.stringify([]));
         
     })

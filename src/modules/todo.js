@@ -66,9 +66,6 @@ export const todo = (() => {
         allTodos.push(todoItem);
         addTodoToAllTodosInLocalStorage(todoItem);
     }
-    //when I edit it and then reload, it doesn't put the correct edited todo
-    //the todos in the future todo/today todo/ all todo arrays and project.taskArr arrays have incorrect todos after editing a todo
-    //i need to create a function that changes the todo in a project if that todo is edited
 
     const addTodayTodo = (todoItem) => {
         let currentDate = new Date();
