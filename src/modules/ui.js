@@ -1,5 +1,4 @@
 import { todo, project } from "./todo";
-import star from '../icons/star-outline.svg'
 import close from '../icons/close.png'
 import option from '../icons/more-vertical-alt.svg'
 
@@ -209,7 +208,6 @@ const displayTasksInProject = () => {
         let description = document.createElement('div');
         let dueDate = document.createElement('div');
         let btnCont = document.createElement('div')
-        let important = document.createElement('img');
         let options = document.createElement('img');
         let container = document.createElement('div');
         let editButton = document.createElement('div');
@@ -218,7 +216,6 @@ const displayTasksInProject = () => {
         title.textContent = project.getCurrentProject().taskArr[i].title;
         description.textContent = project.getCurrentProject().taskArr[i].description;
         dueDate.textContent = project.getCurrentProject().taskArr[i].dueDate;
-        important.src = star;
         options.src = option;
 
         editButton.textContent = 'Edit';
@@ -226,14 +223,12 @@ const displayTasksInProject = () => {
         container.classList.add('optional-buttons')
         container.classList.add('hidden');
         taskContainer.classList.add('task-container')
-        important.classList.add('important');
         options.classList.add('task-options');
         editButton.classList.add('task-edit-button');
         deleteButton.classList.add('task-delete-button');
 
         container.appendChild(editButton);
         container.appendChild(deleteButton);
-        btnCont.appendChild(important);
         btnCont.appendChild(options);
         taskContainer.appendChild(title);
         taskContainer.appendChild(description);
