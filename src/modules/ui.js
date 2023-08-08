@@ -327,6 +327,7 @@ const editTaskInProject = () => {
 
     editButtons.forEach(btn => btn.addEventListener('click', (e) => {
         console.log('hi')
+        e.target.parentNode.classList.toggle('hidden');
         editTaskForm.classList.toggle('hidden');
         overlay.classList.toggle('hidden');
         
