@@ -2,6 +2,7 @@
   --bgColor1: #3f8fdf;
   --bgColor2: rgba(225, 223, 223, 0.478);
   --hoverColor: rgb(217, 217, 217);
+  --hoverColor2: #9dc1e5;
 }
 
 html,
@@ -51,7 +52,7 @@ body {
   justify-items: start;
   align-items: center;
   gap: 1rem;
-  padding-left: 1.25rem;
+  padding-right: 1rem;
   padding-bottom: 1.25rem;
   font-size: 1.25rem;
 }
@@ -60,6 +61,7 @@ body {
   height: 2rem;
   display: flex;
   align-items: center;
+  padding-left: 1rem;
 }
 
 #projects {
@@ -78,7 +80,7 @@ body {
   grid-template-columns: 1fr 0.1fr;
   align-items: center;
   height: 2rem;
-  padding-left: 1.25rem;
+  padding: 0rem 1rem;
   font-size: 1.25rem;
 }
 
@@ -97,12 +99,60 @@ body {
   background-color: var(--hoverColor);
 }
 
+#project-form{
+  margin-top: 1.5rem;
+}
+
+#project-form div {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+#project-name {
+  font-size: 1.25rem;
+  margin-bottom: .25rem;
+}
+
+#add-project-button {
+  margin-top: 1.5rem;
+  width: 100%;
+  height: 2rem;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  border: 1px solid rgb(88, 88, 88);
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: var(--hoverColor);
+}
+
+#submit-project-button {
+  width: 70%;
+  background-color: rgb(93, 246, 93);
+  border: 1px solid rgb(31, 230, 31);
+  border-radius: 4px;
+  height: 1.5rem;
+}
+
+#submit-project-button:hover {
+  background-color: rgb(78, 223, 78);
+}
+
 #all-tasks:hover,
 #today:hover,
 #this-week:hover,
 #important:hover {
   cursor: pointer;
-  background-color: red;
+  background-color: var(--hoverColor2);
+}
+
+#all-tasks,
+#today,
+#this-week,
+#important {
+  width: 100%;
 }
 
 /*
@@ -165,6 +215,7 @@ img {
   padding: 0.5rem;
   font-size: 1.5rem;
   background-color: white;
+  margin-top: 1rem;
 }
 
 #task-form div {
@@ -176,6 +227,19 @@ img {
 
 #task-form > div > input {
   font-size: 1.25rem;
+}
+
+#add-task {
+  margin-top: 3rem;
+  width: 100%;
+  height: 2rem;
+  background-color: white;
+  border-radius: 4px;
+}
+
+#add-task:hover {
+  cursor: pointer;
+  background-color: var(--bgColor2);
 }
 
 #edit-task-form {
@@ -202,10 +266,6 @@ img {
   background-color: rgba(50, 50, 50, 0.468);
   opacity: 0.8;
 }
-
-/*
-* ------------------- form -------------------
-*/
 
 .hidden {
   display: none;

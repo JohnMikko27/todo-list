@@ -34,6 +34,8 @@ export const makeProject = () => {
         displayProjects();
 
         projectForm.reset();
+       // projectForm.classList.toggle('project-form-active');
+      //  projectForm.removeAttribute('project-form-active')
         projectForm.classList.toggle('hidden');
     }, {once:true})
 }
@@ -283,6 +285,9 @@ export const addProject = () => {
     const projectForm = document.querySelector('#project-form');
     addProject.addEventListener('click', () => {
         projectForm.classList.toggle('hidden');
+      //  projectForm.classList.toggle('project-form-active');
+
+      //  projectForm.setAttribute('id', 'project-form-active')
         makeProject();
     });
 }
