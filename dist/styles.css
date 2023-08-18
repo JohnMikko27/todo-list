@@ -23,6 +23,7 @@ body {
   font-size: 3rem;
   background-color: var(--bgColor1);
   color: white;
+  
 }
 
 #content {
@@ -37,6 +38,7 @@ body {
 
 #left-side {
   padding: 1rem;
+  box-shadow: 2px 1px 8px 2px inset rgb(192, 192, 192);
 }
 
 #left-side > div:first-child {
@@ -219,6 +221,8 @@ img {
   font-size: 1.5rem;
   background-color: white;
   margin-top: 1rem;
+  border-radius: 4px;
+  box-shadow: 1px 1px 8px 1px rgb(191, 191, 191);
 }
 
 #task-form div {
@@ -247,8 +251,8 @@ img {
 
 #edit-task-form {
   position: absolute;
-  top: 50%;
-  left: 40%;
+  top: 32%;
+  left: 35%;
   z-index: 1;
   padding: 1rem;
   background-color: white;
