@@ -99,7 +99,7 @@ body {
   background-color: var(--hoverColor);
 }
 
-#project-form{
+#project-form {
   margin-top: 1.5rem;
 }
 
@@ -111,7 +111,7 @@ body {
 
 #project-name {
   font-size: 1.25rem;
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 #add-project-button {
@@ -203,9 +203,9 @@ img {
   border-radius: 4px;
 }
 
-.optional-buttons>div {
+.optional-buttons > div {
   text-align: start;
-  padding: .25rem;
+  padding: 0.25rem;
 }
 
 .task-delete-button:hover,
@@ -255,12 +255,12 @@ img {
   border-radius: 4px;
 }
 
-#edit-task-form>div {
+#edit-task-form > div {
   display: grid;
   grid-template-columns: 1fr;
   width: 30vw;
   font-size: 1.25rem;
-  margin-bottom: .75rem;
+  margin-bottom: 0.75rem;
 }
 
 #submit {
@@ -269,7 +269,7 @@ img {
   border-radius: 4px;
 }
 
-#edit-task-form>div>input {
+#edit-task-form > div > input {
   height: 1.5rem;
 }
 
