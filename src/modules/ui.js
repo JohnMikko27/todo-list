@@ -1,6 +1,5 @@
 import { todo, project } from "./todo";
-import close from '../icons/close.png'
-import option from '../icons/more-vertical-alt.svg'
+import { displayTasksInProject } from "./projectUI"
 
 //attaches eventListener for when taskForm is submitted
 export const makeTodo = () => {
@@ -20,24 +19,6 @@ export const makeTodo = () => {
         taskForm.classList.toggle('hidden');
     }, {once: true})
 }   
-
-//attaches eventListener for when projectForm is submitted
-export const makeProject = () => {
-    const projectForm = document.querySelector('#project-form');
-    projectForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const projectName = document.querySelector('#project-name');
-
-        project.createProject(projectName.value);
-        displayProjects();
-
-        projectForm.reset();
-       // projectForm.classList.toggle('project-form-active');
-      //  projectForm.removeAttribute('project-form-active')
-        projectForm.classList.toggle('hidden');
-    }, {once:true})
-}
 
 //make this the display 'ALL TODOS' function when 'ALL TASKS' is clicked
 export const displayAllTodos = () => {
@@ -152,117 +133,19 @@ const displayFutureTodos = () => {
     }
 }
 
-export const displayProjects = () => {
-    const projectContainer = document.querySelector('#project-container');
-    const addTask = document.querySelector('#add-task');
-    addTask.classList.remove('hidden');
-    projectContainer.textContent = ' ';
-    let l = project.getProjects();
-    for (let i = 0; i < project.getProjects().length; i++) {
-       
-        let div = document.createElement('div');
-        let options = document.createElement('img');
-
-        div.textContent = project.getProjects()[i].projectName;
-        options.src = close;
-        div.classList.add('project');
-        options.classList.add('project-options');
-        //options.classList.add('hidden');
-
-        if (project.getProjects()[i] == project.getCurrentProject()) {
-            div.classList.add('project-clicked');
-        }
-
-        div.appendChild(options);
-        projectContainer.appendChild(div);
-    }
-    deleteProject();
-    showTasksInProject();
-}
-//rename this function later
-//when any of the projects are clicked
-export const showTasksInProject = () => {
-    const projects = document.querySelectorAll('.project');
-    const projectNameHeader = document.querySelector('#project-name-header');
-    const addTask = document.querySelector('#add-task');
-
-    projects.forEach(item => item.addEventListener('click', (e) => {
-        projectNameHeader.textContent = `${e.target.textContent}`;
-        console.log('hi')
-        project.setCurrentProject(e.target.textContent);
-        displayTasksInProject();
-        displayProjects();
-        addTask.classList.remove('hidden');
-    }))
-}
-
 //have to add a delete tasks function that deletes the tasks on the page if the current project is the one that got deleted
 //because it still shows the previous tasks even if that project got deleted
 
-const displayTasksInProject = () => {
-    clearTaskContainer();
-    let tasks = document.querySelector('#tasks')
-    for (let i = 0; i < project.getCurrentProject().taskArr.length; i++) {
-        let taskContainer = document.createElement('div');
-        let title = document.createElement('div');
-        let description = document.createElement('div');
-        let dueDate = document.createElement('div');
-        let btnCont = document.createElement('div')
-        let options = document.createElement('img');
-        let container = document.createElement('div');
-        let editButton = document.createElement('div');
-        let deleteButton = document.createElement('div');
-
-        title.textContent = project.getCurrentProject().taskArr[i].title;
-        description.textContent = project.getCurrentProject().taskArr[i].description;
-        dueDate.textContent = project.getCurrentProject().taskArr[i].dueDate;
-        options.src = option;
-
-        editButton.textContent = 'Edit';
-        deleteButton.textContent = 'Delete';
-        container.classList.add('optional-buttons')
-        container.classList.add('hidden');
-        taskContainer.classList.add('task-container')
-        options.classList.add('task-options');
-        editButton.classList.add('task-edit-button');
-        deleteButton.classList.add('task-delete-button');
-
-        container.appendChild(editButton);
-        container.appendChild(deleteButton);
-        btnCont.appendChild(options);
-        taskContainer.appendChild(title);
-        taskContainer.appendChild(description);
-        taskContainer.appendChild(dueDate);
-        taskContainer.appendChild(btnCont);
-        taskContainer.appendChild(container);
-        tasks.appendChild(taskContainer);
-    }
-    taskOptionClicked();
-}
 
 export const clearTaskContainer = () => {
     const tasks = document.querySelector('#tasks');
     tasks.textContent = ' ';
 }
 
-export const displayDefaultProject = () => {
-    project.createDefaultProject();
-    displayProjects();
-}
-
-//1. when you delete a project, it still shows the current tasks in that project (if you clicked it before deleting)
-//2. other functionality: when you hover over project that's when the option to delete it should show
-//   do this by adding a mouseover eventListener and when you hover over the project, it should show the 'X' to delete it, and then run a 
-//   function that attaches an eventListener to that 'X' when you hover over it
-
-export const deleteProject = () => {
-    const projectOptions = document.querySelectorAll('.project-options');
-
-    projectOptions.forEach(element => element.addEventListener('click', (e) => {
-        project.deleteProject(e.target.previousSibling.textContent);
-        displayProjects();
-    }))
-}
+// export const displayDefaultProject = () => {
+//     project.createDefaultProject();
+//     displayProjects();
+// }
 
 //shows hidden task form
 export const addTask = () => {
@@ -271,19 +154,6 @@ export const addTask = () => {
     addTask.addEventListener('click', () => {
         taskForm.classList.toggle('hidden');
         makeTodo();
-    });
-}
-
-//shows hidden project form
-export const addProject = () => {
-    const addProject = document.querySelector('#add-project-button');
-    const projectForm = document.querySelector('#project-form');
-    addProject.addEventListener('click', () => {
-        projectForm.classList.toggle('hidden');
-      //  projectForm.classList.toggle('project-form-active');
-
-      //  projectForm.setAttribute('id', 'project-form-active')
-        makeProject();
     });
 }
 
@@ -367,7 +237,3 @@ const deleteTaskInProject = () => {
     }))
 }
 
-export const clearProjectHeader = () => {
-    const projectHeader = document.querySelector('#project-name-header');
-    projectHeader.textContent = ' ';
-}

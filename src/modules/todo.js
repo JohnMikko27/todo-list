@@ -112,7 +112,8 @@ export const todo = (() => {
         }
     }
 
-    return { getAllTodos, createTodo, deleteTodo, editTodo, deleteTodoInAllTodosArray, getTodayTodos, deleteTodayTodo, getFutureTodos, deleteFutureTodo };
+    return { getAllTodos, createTodo, deleteTodo, editTodo, deleteTodoInAllTodosArray, 
+             getTodayTodos, deleteTodayTodo, getFutureTodos, deleteFutureTodo };
 })();
 
 export const project = (() => {
