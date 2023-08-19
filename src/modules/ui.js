@@ -18,7 +18,7 @@ export const makeTodo = () => {
         taskForm.reset();
         taskForm.classList.toggle('hidden');
     }, {once: true})
-}   
+};
 
 //make this the display 'ALL TODOS' function when 'ALL TASKS' is clicked
 export const displayAllTodos = () => {
